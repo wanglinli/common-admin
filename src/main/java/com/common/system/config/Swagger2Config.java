@@ -31,10 +31,10 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("大数据可视化平台--man端")
-                .description("大数据可视化平台Man端接口说明文档")
+                .title("接口文档")
+                .description("接口说明文档")
                 .termsOfServiceUrl("")
-                .contact(new Contact("杨秀峰","yangxiufeng@gogbuy.com","yangxiufeng@gogbuy.com"))
+//                .contact(new Contact("user","email","email"))
                 .version("1.0")
                 .build();
     }
