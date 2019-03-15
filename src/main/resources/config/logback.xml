@@ -3,9 +3,9 @@
         scan="true" scanPeriod="10 seconds">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>/export/Logs/common-admin/info.log</File>
+        <File>logs/common-admin/info.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/export/Logs/common-admin/info-%d{yyyyMMdd}.log.%i</fileNamePattern>
+            <fileNamePattern>logs/common-admin/info-%d{yyyyMMdd}.log.%i</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>500MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -21,9 +21,9 @@
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
         </filter>
-        <File>/export/Logs/common-admin/error.log</File>
+        <File>logs/common-admin/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/export/Logs/common-admin/error-%d{yyyyMMdd}.log.%i
+            <fileNamePattern>logs/common-admin/error-%d{yyyyMMdd}.log.%i
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>500MB</maxFileSize>

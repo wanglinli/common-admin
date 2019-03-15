@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-@TableName("rc_user")
+@TableName("common_user")
 public class RcUser extends Model<RcUser> implements Serializable{
     private static final long serialVersionUID = -8597875106667295283L;
     @TableId(value="id", type= IdType.AUTO)
@@ -26,7 +26,7 @@ public class RcUser extends Model<RcUser> implements Serializable{
     private String salt;
     @Excel(name = "姓名",width = 30)
     private String name;
-    @Excel(name = "生日",databaseFormat = "yyyyMMddHHmmss",format = "yyyyMMdd",width = 50)
+    @Excel(name = "生日", format = "yyyyMMdd",width = 50)
     private Date birthday;
     @Excel(name = "性别",replace = {"男_1","女_2"})
     private Integer sex;

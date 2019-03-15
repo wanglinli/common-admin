@@ -22,11 +22,11 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from rc_user
+    from common_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcUser">
-    update rc_user
+    update common_user
     <set>
       <if test="avatar != null">
         avatar = #{avatar,jdbcType=VARCHAR},
@@ -68,6 +68,6 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getUserByName" parameterType="string" resultMap="BaseResultMap">
-    SELECT * FROM rc_user WHERE username=#{username}
+    SELECT * FROM common_user WHERE username=#{username}
   </select>
 </mapper>

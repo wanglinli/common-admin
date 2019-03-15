@@ -11,9 +11,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 /**
- * Created by Mr.Yangxiufeng on 2017/9/11.
- * Time:13:05
- * ProjectName:Common-admin
+ * 逆向工程
  */
 public class Generate {
     public static void main(String[] args) {
@@ -54,7 +52,7 @@ public class Generate {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
-         strategy.setInclude(new String[] { "rc_user" }); // 需要生成的表
+         strategy.setInclude(new String[] { "common_user" }); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         generator.setStrategy(strategy);
 

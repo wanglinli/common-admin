@@ -73,7 +73,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rc_privilege
+    from common_privilege
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -82,19 +82,19 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.common.system.entity.RcPrivilegeExample">
-    delete from rc_privilege
+    delete from common_privilege
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.common.system.entity.RcPrivilege">
-    insert into rc_privilege (role_id, menu_id, create_time
+    insert into common_privilege (role_id, menu_id, create_time
       )
     values (#{roleId,jdbcType=INTEGER}, #{menuId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.common.system.entity.RcPrivilege">
-    insert into rc_privilege
+    insert into common_privilege
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
         role_id,
@@ -119,7 +119,7 @@
     </trim>
   </insert>
   <update id="updateByExampleSelective" parameterType="map">
-    update rc_privilege
+    update common_privilege
     <set>
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=INTEGER},
@@ -136,7 +136,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update rc_privilege
+    update common_privilege
     set role_id = #{record.roleId,jdbcType=INTEGER},
       menu_id = #{record.menuId,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}

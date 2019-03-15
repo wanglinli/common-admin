@@ -3,14 +3,12 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">菜单管理</h3>
+                <div class="box-tools pull-right">
+                    <a class="btn btn-sm btn-primary" target="modal" modal="lg"
+                       href="/menu/add">添加</a>
+                </div>
             </div>
             <div class="box-body">
-                <div class="clearfix">
-                    <div class="col-md-4">
-                        <a class="btn btn-sm btn-primary" target="modal" modal="lg"
-                           href="/menu/add">添加</a>
-                    </div>
-                </div>
                 <table id="menu_tab" class="table" style="margin-top: 20px">
 
                 </table>

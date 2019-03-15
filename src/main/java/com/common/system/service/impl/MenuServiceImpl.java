@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +19,8 @@ import java.util.List;
  */
 @Service
 public class MenuServiceImpl implements MenuService {
-    @Autowired
+
+    @Resource
     private RcMenuMapper menuMapper;
 
     @Override
@@ -27,7 +29,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public int insert(RcMenu record) throws Exception{
+    public int insert(RcMenu record) {
         return menuMapper.insert(record);
     }
 
@@ -48,20 +50,7 @@ public class MenuServiceImpl implements MenuService {
     public PageInfo<RcMenu> listForPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         RcMenuExample example = new RcMenuExample();
-        RcMenuExample.Criteria criteria = example.createCriteria();
-//        criteria.andPIdEqualTo("000000000000000000");
-//        example.setOrderByClause("p_id");
         List<RcMenu> list = menuMapper.selectByExample(example);
-//        List<RcMenu> finalList = new ArrayList<>();
-//        if (list !=null && list.size()>0){
-//            for (RcMenu m:list
-//                 ) {
-//                List<RcMenu> childs = getByParentId(m.getId());
-//                finalList.add(m);
-//                finalList.addAll(childs);
-//                m.setChild(childs);
-//            }
-//        }
         PageInfo<RcMenu> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }

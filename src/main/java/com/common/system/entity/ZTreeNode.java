@@ -2,11 +2,6 @@ package com.common.system.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by Mr.Yangxiufeng on 2017/8/2.
- * Time:17:52
- * ProjectName:Common-admin
- */
 public class ZTreeNode implements Serializable{
     private static final long serialVersionUID = -7664784184286632837L;
 

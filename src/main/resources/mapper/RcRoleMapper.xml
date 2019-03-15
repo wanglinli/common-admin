@@ -48,7 +48,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rc_role
+    from common_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -59,15 +59,15 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from rc_role
+    from common_role
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from rc_role
+    delete from common_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.common.system.entity.RcRole">
-    insert into rc_role (id, name, value,
+    insert into common_role (id, name, value,
       tips, create_time, update_time,
       status)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR},
@@ -75,7 +75,7 @@
       #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.common.system.entity.RcRole">
-    insert into rc_role
+    insert into common_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -124,7 +124,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcRole">
-    update rc_role
+    update common_role
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.system.entity.RcRole">
-    update rc_role
+    update common_role
     set name = #{name,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR},
       tips = #{tips,jdbcType=VARCHAR},
@@ -158,6 +158,6 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="getRoleList" resultMap="BaseResultMap">
-    SELECT * FROM rc_role
+    SELECT * FROM common_role
   </select>
 </mapper>

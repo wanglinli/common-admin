@@ -1,13 +1,11 @@
 package com.common.system.shiro;
 
 import com.common.system.entity.*;
-import com.common.system.mapper.RcDeptMapper;
-import com.common.system.mapper.RcRoleMapper;
-import com.common.system.mapper.RcUserMapper;
 import com.common.system.service.MenuService;
 import com.common.system.service.PrivilegeService;
 import com.common.system.service.RcUserRoleService;
 import com.common.system.service.RoleService;
+import com.common.system.service.UserService;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -16,42 +14,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.TreeSet;
 
-/**
- * Created by Mr.Yangxiufeng on 2017/6/20.
- * Time:16:46
- * ProjectName:Common-admin
- */
 @Service
 public class ShiroFactory {
-    @Autowired
-    private RcUserMapper userMapper;
-    @Autowired
-    private RcRoleMapper roleMapper;
-    @Autowired
-    private RcDeptMapper deptMapper;
-    @Autowired
-    private RcUserRoleService userRoleService;
-    @Autowired
-    private RoleService roleService;
+
+    private final UserService userService;
+
+    private final RoleService roleService;
+
+    private final RcUserRoleService userRoleService;
+
+    private final PrivilegeService privilegeService;
+
+    private final MenuService menuService;
 
     @Autowired
-    private PrivilegeService privilegeService;
-    @Autowired
-    private MenuService menuService;
+    public ShiroFactory(RcUserRoleService userRoleService, PrivilegeService privilegeService, MenuService menuService, UserService userService, RoleService roleService) {
+        this.userRoleService = userRoleService;
+        this.privilegeService = privilegeService;
+        this.menuService = menuService;
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     public RcUser user(String username) {
-        RcUser user = userMapper.getUserByName(username);
+//        RcUser user = userMapper.getUserByName(username);
+        RcUser user = userService.getByUserName(username).getData();
         // 账号不存在
         if (null == user) {
             throw new CredentialsException();
         }
         return user;
     }
-    public ShiroUser shiroUser(RcUser user) {
+    ShiroUser shiroUser(RcUser user) {
         ShiroUser shiroUser = new ShiroUser();
         shiroUser.setId(user.getId());            // 账号id
         shiroUser.setUsername(user.getUsername());// 账号
@@ -61,7 +57,7 @@ public class ShiroFactory {
         if (userRoleList != null && userRoleList.size() > 0){
             for (RcUserRole r: userRoleList
                  ) {
-                RcRole role = roleMapper.selectByPrimaryKey(r.getRoleId());
+                RcRole role = roleService.selectById(r.getRoleId()).getData();
                 roleList.add(role);
             }
             shiroUser.setRoleList(roleList);

@@ -6,15 +6,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author yangxiufeng
- * @since 2017-09-14
- */
-@TableName("rc_operation_log")
+@TableName("common_operation_log")
 public class RcOperationLog extends Model<RcOperationLog> {
 
     private static final long serialVersionUID = 1L;

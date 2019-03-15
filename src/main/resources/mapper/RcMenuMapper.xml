@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rc_menu
+    from common_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,21 +95,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from rc_menu
+    from common_menu
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from rc_menu
+    delete from common_menu
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.common.system.entity.RcMenuExample">
-    delete from rc_menu
+    delete from common_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.common.system.entity.RcMenu">
-    insert into rc_menu (id, code, p_code, 
+    insert into common_menu (id, code, p_code, 
       p_id, name, url, is_menu, 
       level, sort, status, 
       icon, create_time, update_time
@@ -121,7 +121,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.common.system.entity.RcMenu">
-    insert into rc_menu
+    insert into common_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -206,7 +206,7 @@
     </trim>
   </insert>
   <update id="updateByExampleSelective" parameterType="map">
-    update rc_menu
+    update common_menu
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=VARCHAR},
@@ -253,7 +253,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update rc_menu
+    update common_menu
     set id = #{record.id,jdbcType=VARCHAR},
       code = #{record.code,jdbcType=VARCHAR},
       p_code = #{record.pCode,jdbcType=VARCHAR},
@@ -272,7 +272,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcMenu">
-    update rc_menu
+    update common_menu
     <set>
       <if test="code != null">
         code = #{code,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.common.system.entity.RcMenu">
-    update rc_menu
+    update common_menu
     set code = #{code,jdbcType=VARCHAR},
       p_code = #{pCode,jdbcType=VARCHAR},
       p_id = #{pId,jdbcType=VARCHAR},
@@ -330,6 +330,6 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updatePcode" parameterType="hashmap">
-    UPDATE rc_menu SET  p_code = #{newPcode,jdbcType=VARCHAR} Where  p_code = #{oldPcode,jdbcType=VARCHAR}
+    UPDATE common_menu SET  p_code = #{newPcode,jdbcType=VARCHAR} Where  p_code = #{oldPcode,jdbcType=VARCHAR}
   </update>
 </mapper>

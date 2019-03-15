@@ -8,15 +8,7 @@ import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author yangxiufeng
- * @since 2017-09-11
- */
-@TableName("rc_user_role")
+@TableName("common_user_role")
 public class RcUserRole extends Model<RcUserRole> {
 
     private static final long serialVersionUID = 1L;
