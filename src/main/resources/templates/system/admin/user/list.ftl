@@ -13,31 +13,31 @@
                 </div>
             </div>
             <div class="box-body">
-                <div class="clearfix">
-                    <div class="col-md-3">
-                        <div class="input-group date ">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <input type="text" class="form-control" id="securityPremise" placeholder="根据账号搜索...">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <input type="text" class="form-control" id="roleId" placeholder="根据角色搜索...">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" onclick="securityReload();" class="btn btn-primary">搜索</button>
-                    </div>
-                </div>
+                <#--<div class="clearfix">-->
+                    <#--<div class="col-md-3">-->
+                        <#--<div class="input-group date ">-->
+                            <#--<div class="input-group-addon">-->
+                                <#--<i class="fa fa-calendar"></i>-->
+                            <#--</div>-->
+                            <#--<input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">-->
+                        <#--</div>-->
+                    <#--</div>-->
+                    <#--<div class="col-md-3">-->
+                        <#--<div class="input-group">-->
+                            <#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
+                            <#--<input type="text" class="form-control" id="securityPremise" placeholder="根据账号搜索...">-->
+                        <#--</div>-->
+                    <#--</div>-->
+                    <#--<div class="col-md-3">-->
+                        <#--<div class="input-group">-->
+                            <#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
+                            <#--<input type="text" class="form-control" id="roleId" placeholder="根据角色搜索...">-->
+                        <#--</div>-->
+                    <#--</div>-->
+                    <#--<div class="col-md-3">-->
+                        <#--<button type="submit" onclick="securityReload();" class="btn btn-primary">搜索</button>-->
+                    <#--</div>-->
+                <#--</div>-->
 
                 <table id="security_tab" class="table table-bordered table-striped" style="margin-top: 10px">
                     <thead>
@@ -111,7 +111,6 @@
                     render: function (data) {
                         var listStr = "";
                         var list = data.roleList;
-                        console.log(list);
                         if (list) {
                             for (var i = 0; i < list.length; i++) {
                                 listStr += list[i].name + ";";
@@ -162,23 +161,12 @@
         });
 
         $("#securitySeek").on("click", function () {
-//            reloadTable(security_tab, "#securityTime", "#securityPremise");
             securityReload();
         });
     });
 
     function securityReload() {
         reloadTable(security_tab);
-//        var date = $("#securityTime").val();
-//        var search = $("#securityPremise").val();
-//        var roleId = $("#roleId").val();
-//        var param = {
-//            "date": date,
-//            "search": search,
-//            "roleId":roleId
-//        };
-//        security_tab.settings()[0].ajax.data = param;
-//        security_tab.ajax.reload();
     }
 
     function securityToListAjax() {

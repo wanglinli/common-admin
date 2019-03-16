@@ -5,7 +5,6 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.common.system.entity.RcRole;
 import com.common.system.entity.RcRoleWrapper;
 import com.common.system.entity.RcUser;
 import com.common.system.entity.RcUserRole;
@@ -32,25 +31,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
-/**
- * Created by Mr.Yangxiufeng on 2017/6/21.
- * Time:15:46
- * ProjectName:Common-admin
- */
+
 @Controller
 @RequestMapping(value = "user")
 public class UserMgrController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserMgrController.class);
 
+    private final UserService userService;
+    private final RoleService roleService;
+    private final RcUserRoleService userRoleService;
+
     @Autowired
-    private UserService userService;
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private RcUserRoleService userRoleService;
+    public UserMgrController(UserService userService, RoleService roleService, RcUserRoleService userRoleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.userRoleService = userRoleService;
+    }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public ModelAndView list(ModelAndView modelAndView) {
@@ -61,21 +59,16 @@ public class UserMgrController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "page")
     public PageBean<RcUser> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
-                                         @RequestParam(value = "length", defaultValue = "10") int pageSize,
-                                         @RequestParam(value = "date", required = false) String date,
-                                         @RequestParam(value = "search", required = false) String search,
-                                         HttpServletRequest request) {
-        Map<String,String[]> params = request.getParameterMap();
+                                         @RequestParam(value = "length", defaultValue = "10") int pageSize) {
         PageInfo<RcUser> pageInfo = userService.listForPage((start / pageSize) + 1, pageSize);
-        return new PageBean<RcUser>(pageInfo);
+        return new PageBean<>(pageInfo);
     }
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public
     @ResponseBody
     Result delete(@PathVariable Integer id) {
-        Result<Integer> result = userService.deleteById(id);
-        return result;
+        return userService.deleteById(id);
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
@@ -125,8 +118,7 @@ public class UserMgrController extends BaseController {
         rcUser.setSalt(salt);
         String saltPwd = ShiroKit.md5(rcUser.getPassword(), salt);
         rcUser.setPassword(saltPwd);
-        Result<Integer> result = userService.save(rcUser);
-        return result;
+        return userService.save(rcUser);
     }
 
     @RequestMapping(value = "goResetPwd/{id}", method = RequestMethod.GET)
@@ -149,8 +141,8 @@ public class UserMgrController extends BaseController {
         user.setPassword(saltPwd);
         user.setSalt(salt);
         userService.modifyPwd(user);
-        result.setStatus(true);
         result.setCode(MsgCode.SUCCESS);
+        result.setStatus(true);
         result.setMsg("操作成功");
         return result;
     }
@@ -166,8 +158,6 @@ public class UserMgrController extends BaseController {
     /**
      * <p>修改密码</p>
      *
-     * @param id
-     * @return
      */
     @RequestMapping(value = "modifyPwd", method = RequestMethod.POST)
     public
@@ -244,10 +234,10 @@ public class UserMgrController extends BaseController {
             //删除旧记录
             userRoleService.deleteByUserId(id);
             List<RcUserRole> list = new ArrayList<>();
-            for (int i = 0; i < roleIds.length; i++) {
+            for (String roleId1 : roleIds) {
                 RcUserRole userRole = new RcUserRole();
                 userRole.setUserId(id);
-                userRole.setRoleId(Integer.valueOf(roleIds[i]));
+                userRole.setRoleId(Integer.valueOf(roleId1));
                 userRole.setCreateTime(new Date());
                 userRole.setCreateBy(getUser().getName());
                 list.add(userRole);

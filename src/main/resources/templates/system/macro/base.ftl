@@ -234,19 +234,8 @@
 <script src="adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
-    var list_ajax;
-    var date_ajax;
-    var search_ajax;
     //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
-    //查询添加的时候需要重写该方法，每个页面查询参数不一样，请参考user/list 杨秀峰 2017-9-14
-    window.reloadTable = function (oTable, datePremise, premise) {
-//        var date = $(datePremise).val();
-//        var search = $(premise).val();
-//        var param = {
-//            "date": date,
-//            "search": search
-//        };
-//        oTable.settings()[0].ajax.data = param;
+    window.reloadTable = function (oTable) {
         oTable.ajax.reload();
     }
 </script>
