@@ -1,6 +1,6 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.BillIncome;
+import com.common.system.entity.Bill;
 import com.common.system.entity.RcRoleWrapper;
 import com.common.system.mapper.BillMapper;
 import com.common.system.service.BillService;
@@ -19,15 +19,13 @@ public class BillServiceImpl implements BillService {
     private BillMapper mapper;
 
     @Override
-    public PageInfo<BillIncome> listForPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<BillIncome> roleList = mapper.getIncomeBill();
-        for (BillIncome billIncome : roleList) {
-            billIncome.getCreateTime();
-        }
-        return new PageInfo<BillIncome>(roleList);
+        List<Bill> roleList = mapper.getbillBill();
+
+        return new PageInfo<Bill>(roleList);
     }
 
 
@@ -38,32 +36,52 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public Result<BillIncome> selectById(Integer id) {
+    public Result<Bill> selectById(Integer id) {
+        Result<Bill> result = new Result<Bill>();
+        Bill bill =  mapper.getByID(id);
+        if(bill!=null){
+            result.setStatus(true);
+            result.setCode(0);
+            result.setMsg("SUCCESS!");
+            result.setData(bill);
+        }
+        return result;
+    }
+
+    @Override
+    public Bill selectByRoleName(String roleName) {
         return null;
     }
 
     @Override
-    public BillIncome selectByRoleName(String roleName) {
+    public Bill selectByRoleValue(String roleValue) {
         return null;
     }
 
     @Override
-    public BillIncome selectByRoleValue(String roleValue) {
+    public Result<Integer> save(Bill type, List<Integer> permissionIds) {
         return null;
     }
 
     @Override
-    public Result<Integer> save(BillIncome type, List<Integer> permissionIds) {
-        return null;
-    }
-
-    @Override
-    public Result<Integer> update(BillIncome type) {
-        return null;
+    public Result<Integer> update(Bill type) {
+        int res = mapper.update(type);
+        return getIntegerResult(new Result<Integer>(),res);
     }
 
     @Override
     public List<RcRoleWrapper> getRoleWrapperList() {
         return null;
+    }
+
+
+    private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
+        if (res > 0){
+            result.setData(res);
+            result.setStatus(true);
+            result.setCode(0);
+            result.setMsg("成功!");
+        }
+        return result;
     }
 }

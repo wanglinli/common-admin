@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.BillIncome;
+import com.common.system.entity.Bill;
 import com.common.system.entity.RcRoleWrapper;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
@@ -14,18 +14,21 @@ import java.util.List;
  */
 public interface BillService {
 
-    PageInfo<BillIncome> listForPage(Integer pageNum, Integer pageSize);
+    PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize);
 
     int deleteById(Integer id);
 
-    Result<BillIncome> selectById(Integer id);
+    Result<Bill> selectById(Integer id);
 
-    BillIncome selectByRoleName(String roleName);
+    Bill selectByRoleName(String roleName);
 
-    BillIncome selectByRoleValue(String roleValue);
+    Bill selectByRoleValue(String roleValue);
 
-    Result<Integer> save(BillIncome type, List<Integer> permissionIds);
-    Result<Integer> update(BillIncome type);
+    Result<Integer> save(Bill type, List<Integer> permissionIds);
+
+    Result<Integer> update(Bill type);
 
     List<RcRoleWrapper> getRoleWrapperList();
+
+
 }
