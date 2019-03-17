@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface DealTypeService {
 
-    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize);
+    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut);
 
     int deleteById(Integer id);
 

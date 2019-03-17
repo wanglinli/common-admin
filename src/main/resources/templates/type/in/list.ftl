@@ -41,7 +41,7 @@ $(function() {
 		"serverSide":true, //启用服务器端分页
 		"bInfo":false,
 		"language":{"url":"adminlte/plugins/datatables/language.json"},
-		"ajax":{"url":"/type/page","type":"post"},
+		"ajax":{"url":"/type/page","type":"post","data":{"inOrOut":0}},
 		"columns":[ 
 		    {"data":null}, 
 			{"data":"type"},

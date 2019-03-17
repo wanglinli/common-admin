@@ -1,5 +1,9 @@
 package com.common.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class DealType {
 
     public DealType() {
@@ -7,11 +11,22 @@ public class DealType {
 
     private String id;
 
+    private int inOrOut;
+
+    public int getInOrOut() {
+        return inOrOut;
+    }
+
+    public void setInOrOut(int inOrOut) {
+        this.inOrOut = inOrOut;
+    }
+
     private String type;
 
     private String note;
 
-    private String createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     public String getId() {
         return id;
@@ -37,11 +52,11 @@ public class DealType {
         this.note = note;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

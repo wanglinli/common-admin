@@ -19,11 +19,11 @@ public class DealTypeServiceImpl implements DealTypeService {
     private DealTypeMapper mapper;
 
     @Override
-    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<DealType> roleList = mapper.getDealTypes();
+        List<DealType> roleList = mapper.getDealTypesByInOrOut(inOrOut);
         return new PageInfo<>(roleList);
     }
 

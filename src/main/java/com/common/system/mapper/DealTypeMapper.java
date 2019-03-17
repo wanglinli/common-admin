@@ -9,6 +9,7 @@ import java.util.List;
 @Mapper
 public interface DealTypeMapper {
 
-    @Select("select * from common_deal_type")
-    List<DealType> getDealTypes();
+    @Select("select * from common_deal_type where inOrOut=#{inOrOut}")
+    List<DealType> getDealTypesByInOrOut(int inOrOut);
+
 }

@@ -35,8 +35,9 @@ public class TypeMgrController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "page")
     public PageBean<DealType> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
-                                         @RequestParam(value = "length", defaultValue = "10") int pageSize) {
-        PageInfo<DealType> pageInfo = service.listForPage((start / pageSize) + 1, pageSize);
+                                         @RequestParam(value = "length", defaultValue = "10") int pageSize,
+                                           @RequestParam(value = "inOrOut", defaultValue = "0") int inOrOut) {
+        PageInfo<DealType> pageInfo = service.listForPage((start / pageSize) + 1, pageSize,inOrOut);
         return new PageBean<>(pageInfo);
     }
 
