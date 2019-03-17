@@ -13,43 +13,17 @@
                 </div>
             </div>
             <div class="box-body">
-			<#--<div class="clearfix">-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group date ">-->
-			<#--<div class="input-group-addon">-->
-			<#--<i class="fa fa-calendar"></i>-->
-			<#--</div>-->
-			<#--<input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group">-->
-			<#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
-			<#--<input type="text" class="form-control" id="securityPremise" placeholder="根据账号搜索...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group">-->
-			<#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
-			<#--<input type="text" class="form-control" id="roleId" placeholder="根据角色搜索...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<button type="submit" onclick="securityReload();" class="btn btn-primary">搜索</button>-->
-			<#--</div>-->
-			<#--</div>-->
-
                 <table id="bills_outcome_tab" class="table table-bordered table-striped" style="margin-top: 10px">
                     <thead>
-                    <tr>
-                    <tr>
-                        <th>序号</th>
-                        <th>创建时间</th>
-                        <th>金额</th>
-                        <th>交易方式</th>
-                        <th>交易说明</th>
-                    </tr>
-                    </tr>
+                        <tr>
+                            <th>序号</th>
+                            <th>支出时间</th>
+                            <th>创建时间</th>
+                            <th>金额</th>
+                            <th>交易方式</th>
+                            <th>交易说明</th>
+                            <th>操作</th>
+                        </tr>
                     </thead>
                 </table>
             </div>
@@ -87,11 +61,11 @@
             },
             "columns": [
                 {"data": null},
-                {"data": "username"},
-                {"data": "name"},
-                {"data": null},
-                {"data": null},
-                {"data": "createTime"},
+                {"data": "payTime"},
+                {"data": "payTime"},
+                {"data": "payMoney"},
+                {"data": "payType"},
+                {"data": "payNote"},
                 {"data": null}
             ],
             "columnDefs": [
@@ -134,7 +108,6 @@
                     "targets": -1,
                     "data": null,
                     "render": function (data) {
-//					debugger;
                         var btn = "";
                         btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
                         if (isNull(data.role) || 'super' != data.role.value) {
