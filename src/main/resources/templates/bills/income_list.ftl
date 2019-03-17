@@ -9,7 +9,9 @@
                     <a onclick="securityToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg"
                        href="/user/add">添加</a>
 				</@shiro.hasPermission>
-                    <a class="btn btn-sm btn-primary" href="/user/exportExcel">导出</a>
+                <@shiro.hasPermission name="bills/exportExcel">
+                    <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>
+                </@shiro.hasPermission>
                 </div>
             </div>
             <div class="box-body">

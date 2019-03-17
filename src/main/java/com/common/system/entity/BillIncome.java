@@ -1,5 +1,6 @@
 package com.common.system.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -16,12 +17,18 @@ public class BillIncome extends Model<BillIncome> implements Serializable {
 
     @TableId(value="id", type= IdType.AUTO)
     private Integer id;
+    @Excel(name="收入时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date incomeTime;
+    @Excel(name="收入金额")
     private String incomeMoney;
+    @Excel(name="收款方式")
     private String incomeType;
+    @Excel(name="收入人")
     private String incomeUser;
+    @Excel(name="收入说明")
     private String incomeNote;
+    @Excel(name="创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 

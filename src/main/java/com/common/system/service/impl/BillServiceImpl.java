@@ -24,8 +24,13 @@ public class BillServiceImpl implements BillService {
             PageHelper.startPage(pageNum,pageSize);
         }
         List<BillIncome> roleList = mapper.getIncomeBill();
+        for (BillIncome billIncome : roleList) {
+            billIncome.getCreateTime();
+        }
         return new PageInfo<BillIncome>(roleList);
     }
+
+
 
     @Override
     public int deleteById(Integer id) {
