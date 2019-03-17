@@ -28,13 +28,28 @@ public class DealTypeServiceImpl implements DealTypeService {
     }
 
     @Override
-    public int deleteById(Integer id) {
-        return 0;
+    public Result<DealType> deleteById(Integer id) {
+        Result<DealType> result = new Result<>();
+        int res = mapper.delete(id);
+        if (res > 0 ){
+            result.setStatus(true);
+            result.setCode(0);
+            result.setMsg("成功!");
+        }
+        return result;
     }
 
     @Override
     public Result<DealType> selectById(Integer id) {
-        return null;
+        Result<DealType> result = new Result<>();
+        DealType res = mapper.getById(id);
+        if (res != null ){
+            result.setData(res);
+            result.setStatus(true);
+            result.setCode(0);
+            result.setMsg("成功!");
+        }
+        return result;
     }
 
     @Override
@@ -48,13 +63,27 @@ public class DealTypeServiceImpl implements DealTypeService {
     }
 
     @Override
-    public Result<Integer> save(DealType type, List<Integer> permissionIds) {
-        return null;
+    public Result<Integer> save(DealType type) {
+        Result<Integer> result = new Result<>();
+        int res = mapper.save(type);
+        return getIntegerResult(result, res);
     }
 
     @Override
     public Result<Integer> update(DealType type) {
-        return null;
+        Result<Integer> result = new Result<>();
+        int res = mapper.update(type);
+        return getIntegerResult(result, res);
+    }
+
+    private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
+        if (res > 0){
+            result.setData(res);
+            result.setStatus(true);
+            result.setCode(0);
+            result.setMsg("成功!");
+        }
+        return result;
     }
 
     @Override

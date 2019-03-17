@@ -50,9 +50,8 @@ public class IndexController {
                 List<RcMenu> secondMenuList = menuService.selectInIds(ids,wantList);
                 for (RcMenu menu:menuList) {
                     List<RcMenu> childList = new ArrayList<>();
-                    for (RcMenu nu:secondMenuList
-                         ) {
-                        if (menu.getId().equals(nu.getpId())){
+                    for (RcMenu nu:secondMenuList) {
+                        if (menu.getId().equals(nu.getpId()) && menu.getIsMenu() == 1 && nu.getIsMenu() == 1){
                             childList.add(nu);
                         }
                     }

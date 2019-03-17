@@ -17,7 +17,7 @@ public interface DealTypeService {
 
     PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut);
 
-    int deleteById(Integer id);
+    Result<DealType> deleteById(Integer id);
 
     Result<DealType> selectById(Integer id);
 
@@ -25,7 +25,8 @@ public interface DealTypeService {
 
     DealType selectByRoleValue(String roleValue);
 
-    Result<Integer> save(DealType type, List<Integer> permissionIds);
+    Result<Integer> save(DealType type);
+
     Result<Integer> update(DealType type);
 
     List<RcRoleWrapper> getRoleWrapperList();
