@@ -13,13 +13,11 @@
 				<table id="type_in_tab" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<tr>
-								<th>序号</th>
-								<th>类型</th>
-								<th>备注</th>
-								<th>创建时间</th>
-								<th>操作</th>
-							</tr>
+							<th>序号</th>
+							<th>类型</th>
+							<th>备注</th>
+							<th>创建时间</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 				</table>
