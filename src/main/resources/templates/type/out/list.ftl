@@ -15,11 +15,11 @@
 						<tr>
 							<tr>
 								<th>序号</th>
-								<th>时间</th>
-								<th>内容</th>
-								<th>状态</th>
+								<th>类型</th>
+								<th>备注</th>
+								<th>创建时间</th>
 								<th>操作</th>
-							</tr>
+						    </tr>
 						</tr>
 					</thead>
 				</table>

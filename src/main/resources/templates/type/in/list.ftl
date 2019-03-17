@@ -15,13 +15,9 @@
 						<tr>
 							<tr>
 								<th>序号</th>
-								<th>借入或借出时间</th>
-								<th>金额</th>
+								<th>类型</th>
 								<th>备注</th>
-								<th>借款人</th>
-								<th>借出人</th>
-								<th>状态</th>
-								<th>记录时间</th>
+								<th>创建时间</th>
 								<th>操作</th>
 							</tr>
 						</tr>
@@ -45,12 +41,11 @@ $(function() {
 		"serverSide":true, //启用服务器端分页
 		"bInfo":false,
 		"language":{"url":"adminlte/plugins/datatables/language.json"},
-		"ajax":{"url":"/role/page","type":"post"},
+		"ajax":{"url":"/type/page","type":"post"},
 		"columns":[ 
 		    {"data":null}, 
-			{"data":"name"},
-			{"data":"value"},
-			{"data":null},
+			{"data":"type"},
+			{"data":"note"},
 			{"data":"createTime"},
 			{"data":null} 
 			],
@@ -63,19 +58,19 @@ $(function() {
 			        return No;
 			    }
 			},
-			{
-			    targets: 3,
-			    data: null,
-			    render: function (data) {
-			    	if(data.status == "0"){
-			    		return "不可用";
-			    	}
-			    	if(data.status == "1"){
-			    		return "可用";
-			    	}
-			    	return "未知状态";
-			    }
-			},
+			// {
+			//     targets: 3,
+			//     data: null,
+			//     render: function (data) {
+			//     	if(data.status == "0"){
+			//     		return "不可用";
+			//     	}
+			//     	if(data.status == "1"){
+			//     		return "可用";
+			//     	}
+			//     	return "未知状态";
+			//     }
+			// },
             {
 				"targets" : -1,
 				"data" : null,
