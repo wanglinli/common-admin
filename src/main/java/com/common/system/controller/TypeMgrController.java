@@ -104,7 +104,12 @@ public class TypeMgrController extends BaseController {
         return new PageBean<>(pageInfo);
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "typeInOrOut")
+    public List<DealType>  queryInOrOut(@RequestParam(value = "inOrOut") int inOrOut){
+        List<DealType> list = service.selectInOrOut(inOrOut);
+        return  list;
+    }
 
 
 }

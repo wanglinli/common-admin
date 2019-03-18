@@ -23,6 +23,11 @@
                     <label id="billNote">交易说明</label>
                     <input type="text" class="form-control" name="billNote" id="billNote" value="${bean.billNote!}"
                            placeholder="输入交易说明...">
+                    <select>
+                        <#list list as type>
+                            <option value="${type.type}">${type.type}</option>
+                        </#list>
+                    </select>
                 </div>
             </div>
             <div class="box-footer">
@@ -39,6 +44,21 @@
     </div>
 </div>
 <script type="text/javascript">
+
+    $(function () {
+        $.ajax({
+            url: '/type/typeInOrOut',
+            type: 'post',
+            dataType:  'text',
+            data:'{"inOrOut":0}',
+            success:function(data){
+
+            }
+        });
+    });
+
+
+
     function securityUpdateUser() {
 //        debugger;
         $.ajax({

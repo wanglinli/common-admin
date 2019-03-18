@@ -24,4 +24,7 @@ public interface DealTypeService {
     Result<Integer> save(DealType type);
 
     Result<Integer> update(DealType type);
+
+    List<DealType> selectInOrOut(Integer inOrOut);
+
 }
