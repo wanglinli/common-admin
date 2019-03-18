@@ -23,7 +23,8 @@
                     <label for="billNote" id="billNote">交易说明</label>
                     <select type="text" class="form-control" name="billNote" id="billNote">
                         <#list type as obj>
-                            <option <#if bean.billNote== obj.type> selected </#if> value="${obj.type}">${obj.type}</option>
+                            <option <#if bean.billNote== obj.type> selected </#if>
+                                    <#if obj.inOrOut == 0> value="${obj.type}" >${obj.type} </#if> </option>
                         </#list>
                     </select>
                 </div>
