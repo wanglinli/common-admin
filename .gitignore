@@ -7,3 +7,5 @@
 /mvnw.cmd
 /mvnw
 /.mvn
+logs/
+*.properties
