@@ -11,6 +11,10 @@ public interface DealTypeMapper {
     @Select("select * from common_deal_type where inOrOut=#{inOrOut}")
     List<DealType> getDealTypesByInOrOut(int inOrOut);
 
+    @Select("select * from common_deal_type")
+    List<DealType> queryAll();
+
+
     @Insert("insert into common_deal_type(type,note,inOrOut,createTime) values(#{type},#{note},#{inOrOut},#{createTime})")
     Integer save(DealType dealType);
 

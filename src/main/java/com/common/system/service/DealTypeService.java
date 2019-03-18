@@ -27,4 +27,6 @@ public interface DealTypeService {
 
     List<DealType> selectInOrOut(Integer inOrOut);
 
+    List<DealType> queryAll();
+
 }

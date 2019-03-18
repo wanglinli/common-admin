@@ -72,6 +72,11 @@ public class DealTypeServiceImpl implements DealTypeService {
         return mapper.getDealTypesByInOrOut(inOrOut);
     }
 
+    @Override
+    public List<DealType> queryAll() {
+        return mapper.queryAll();
+    }
+
     private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
         if (res > 0){
             result.setData(res);

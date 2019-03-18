@@ -20,12 +20,10 @@
                            placeholder="输入收款方式...">
                 </div>
                 <div class="form-group">
-                    <label id="billNote">交易说明</label>
-                    <input type="text" class="form-control" name="billNote" id="billNote" value="${bean.billNote!}"
-                           placeholder="输入交易说明...">
-                    <select>
-                        <#list list as type>
-                            <option value="${type.type}">${type.type}</option>
+                    <label for="billNote" id="billNote">交易说明</label>
+                    <select type="text" class="form-control" name="billNote" id="billNote">
+                        <#list type as obj>
+                            <option <#if bean.billNote== obj.type> selected </#if> value="${obj.type}">${obj.type}</option>
                         </#list>
                     </select>
                 </div>
@@ -44,19 +42,6 @@
     </div>
 </div>
 <script type="text/javascript">
-
-    $(function () {
-        $.ajax({
-            url: '/type/typeInOrOut',
-            type: 'post',
-            dataType:  'text',
-            data:'{"inOrOut":0}',
-            success:function(data){
-
-            }
-        });
-    });
-
 
 
     function securityUpdateUser() {

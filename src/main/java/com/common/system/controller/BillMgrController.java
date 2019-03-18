@@ -6,6 +6,7 @@ import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import com.common.system.entity.Bill;
 import com.common.system.service.BillService;
+import com.common.system.service.DealTypeService;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
@@ -27,6 +28,9 @@ import java.util.Date;
 public class BillMgrController extends BaseController{
     @Autowired
     private BillService billService;
+
+    @Autowired
+    private DealTypeService dealTypeService;
 
     /**
      * 历史账单查询
@@ -87,6 +91,7 @@ public class BillMgrController extends BaseController{
     public ModelAndView edit(@PathVariable Integer id, ModelAndView modelAndView) {
         Result<Bill> result = billService.selectById(id);
             modelAndView.addObject("bean", result.getData());
+            modelAndView.addObject("type", dealTypeService.queryAll());
         modelAndView.setViewName("/bills/edit");
         return modelAndView;
     }
