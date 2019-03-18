@@ -18,11 +18,11 @@ public class RemindServiceImpl implements RemindService {
     private RemindMapper mapper;
 
     @Override
-    public PageInfo<Remind> listForPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Remind> listForPage(Integer pageNum, Integer pageSize,String user) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<Remind> roleList = mapper.getReminds();
+        List<Remind> roleList = mapper.getReminds(user);
         return new PageInfo<>(roleList);
     }
 
@@ -31,9 +31,9 @@ public class RemindServiceImpl implements RemindService {
         Result<Remind> result = new Result<>();
         int res = mapper.delete(id);
         if (res > 0 ){
-            result.setStatus(true);
             result.setCode(0);
             result.setMsg("成功!");
+            result.setStatus(true);
         }
         return result;
     }
@@ -43,10 +43,10 @@ public class RemindServiceImpl implements RemindService {
         Result<Remind> result = new Result<>();
         Remind res = mapper.getById(id);
         if (res != null ){
-            result.setData(res);
             result.setStatus(true);
             result.setCode(0);
             result.setMsg("成功!");
+            result.setData(res);
         }
         return result;
     }
@@ -67,8 +67,8 @@ public class RemindServiceImpl implements RemindService {
 
     private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
         if (res > 0){
-            result.setData(res);
             result.setStatus(true);
+            result.setData(res);
             result.setCode(0);
             result.setMsg("成功!");
         }

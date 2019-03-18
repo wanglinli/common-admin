@@ -11,7 +11,7 @@ import com.github.pagehelper.PageInfo;
  */
 public interface RemindService {
 
-    PageInfo<Remind> listForPage(Integer pageNum, Integer pageSize);
+    PageInfo<Remind> listForPage(Integer pageNum, Integer pageSize,String user);
 
     Result<Remind> deleteById(Integer id);
 

@@ -2,22 +2,23 @@
 	<div class="box-body  no-padding">
 		<table class="table table-striped">
 			<tr>
-				<td>类型：</td>
-				<td style="width: 90%">${bean.type!}</td>
+				<td>时间：</td>
+				<td style="width: 90%">${bean.time?string('yyyy-MM-dd HH:mm:ss')}</td>
 			</tr>
 			<tr>
-				<td>备注说明：</td>
-				<td>${bean.note!}</td>
+				<td>提醒内容：</td>
+				<td>${bean.content!}</td>
 			</tr>
 			<tr>
-				<td>收入or支出:</td>
+				<td>当前状态:</td>
 				<td>
-					<#if bean.inOrOut == 0>收入</#if>
+					<#if bean.status == 0>完成</#if>
+					<#if bean.status == 1>待做</#if>
 				</td>
 			</tr>
 			<tr>
-				<td>更新时间：</td>
-				<td>${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+				<td>用户：</td>
+				<td>${bean.user}</td>
 			</tr>
 
 		</table>

@@ -8,8 +8,8 @@ import java.util.List;
 @Mapper
 public interface RemindMapper {
 
-    @Select("select * from common_remind")
-    List<Remind> getReminds();
+    @Select("select * from common_remind where user=#{user}")
+    List<Remind> getReminds(String user);
 
     @Insert("insert into common_remind(time,content,status,user) values(#{time},#{content},#{status},#{user})")
     Integer save(Remind remind);

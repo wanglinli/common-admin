@@ -36,8 +36,9 @@ public class PlanMgrController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "remind/page")
     public PageBean<Remind> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
-                                         @RequestParam(value = "length", defaultValue = "10") int pageSize) {
-        PageInfo<Remind> pageInfo = remindService.listForPage((start / pageSize) + 1, pageSize);
+                                         @RequestParam(value = "length", defaultValue = "10") int pageSize,
+                                         @RequestParam(value = "user") String user) {
+        PageInfo<Remind> pageInfo = remindService.listForPage((start / pageSize) + 1, pageSize,user);
         return new PageBean<>(pageInfo);
     }
 
@@ -50,7 +51,7 @@ public class PlanMgrController extends BaseController {
     @RequestMapping(value = "remind/edit/{id}",method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView,@PathVariable Integer id){
         Result<Remind> result = remindService.selectById(id);
-        modelAndView.addObject("type",result.getData());
+        modelAndView.addObject("remind",result.getData());
         modelAndView.setViewName("/plan/remind/edit");
         return modelAndView;
     }

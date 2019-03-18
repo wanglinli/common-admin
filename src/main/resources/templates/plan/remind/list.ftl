@@ -25,11 +25,12 @@
 		</div>
 	</div>
 </div>
-
+<div style="display: none">
+	<label for="user">username</label>
+	<input id="user" value="${user.username}"/></div>
 <script type="text/javascript">
 var remind_tab;
 $(function() {
-
 	//初始化表格
 	var No=0;
 	remind_tab = $('#remind_tab').DataTable({
@@ -39,7 +40,7 @@ $(function() {
 		"serverSide":true, //启用服务器端分页
 		"bInfo":false,
 		"language":{"url":"adminlte/plugins/datatables/language.json"},
-		"ajax":{"url":"/plan/remind/page","type":"post"},
+		"ajax":{"url":"/plan/remind/page","type":"post","data":{"user":$('#user').val()}},
 		"columns":[ 
 		    {"data":null}, 
 			{"data":"time"},
