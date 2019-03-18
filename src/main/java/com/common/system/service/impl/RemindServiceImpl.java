@@ -1,9 +1,8 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.DealType;
-import com.common.system.entity.RcRoleWrapper;
-import com.common.system.mapper.DealTypeMapper;
-import com.common.system.service.DealTypeService;
+import com.common.system.entity.Remind;
+import com.common.system.mapper.RemindMapper;
+import com.common.system.service.RemindService;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,23 +12,23 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class DealTypeServiceImpl implements DealTypeService {
+public class RemindServiceImpl implements RemindService {
 
     @Resource
-    private DealTypeMapper mapper;
+    private RemindMapper mapper;
 
     @Override
-    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut) {
+    public PageInfo<Remind> listForPage(Integer pageNum, Integer pageSize) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<DealType> roleList = mapper.getDealTypesByInOrOut(inOrOut);
+        List<Remind> roleList = mapper.getReminds();
         return new PageInfo<>(roleList);
     }
 
     @Override
-    public Result<DealType> deleteById(Integer id) {
-        Result<DealType> result = new Result<>();
+    public Result<Remind> deleteById(Integer id) {
+        Result<Remind> result = new Result<>();
         int res = mapper.delete(id);
         if (res > 0 ){
             result.setStatus(true);
@@ -40,9 +39,9 @@ public class DealTypeServiceImpl implements DealTypeService {
     }
 
     @Override
-    public Result<DealType> selectById(Integer id) {
-        Result<DealType> result = new Result<>();
-        DealType res = mapper.getById(id);
+    public Result<Remind> selectById(Integer id) {
+        Result<Remind> result = new Result<>();
+        Remind res = mapper.getById(id);
         if (res != null ){
             result.setData(res);
             result.setStatus(true);
@@ -52,18 +51,17 @@ public class DealTypeServiceImpl implements DealTypeService {
         return result;
     }
 
-
     @Override
-    public Result<Integer> save(DealType type) {
+    public Result<Integer> save(Remind remind) {
         Result<Integer> result = new Result<>();
-        int res = mapper.save(type);
+        int res = mapper.save(remind);
         return getIntegerResult(result, res);
     }
 
     @Override
-    public Result<Integer> update(DealType type) {
+    public Result<Integer> update(Remind remind) {
         Result<Integer> result = new Result<>();
-        int res = mapper.update(type);
+        int res = mapper.update(remind);
         return getIntegerResult(result, res);
     }
 

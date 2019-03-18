@@ -21,13 +21,7 @@ public interface DealTypeService {
 
     Result<DealType> selectById(Integer id);
 
-    DealType selectByRoleName(String roleName);
-
-    DealType selectByRoleValue(String roleValue);
-
     Result<Integer> save(DealType type);
 
     Result<Integer> update(DealType type);
-
-    List<RcRoleWrapper> getRoleWrapperList();
 }

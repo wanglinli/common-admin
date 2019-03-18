@@ -1,19 +1,41 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 106.13.0.171
+Source Server         : mysql3307
 Source Server Version : 50643
-Source Host           : 106.13.0.171:3306
-Source Database       : admin
+Source Host           : 106.13.0.171:3307
+Source Database       : db_test
 
 Target Server Type    : MYSQL
 Target Server Version : 50643
 File Encoding         : 65001
 
-Date: 2019-03-17 19:52:55
+Date: 2019-03-18 00:14:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for common_bill
+-- ----------------------------
+DROP TABLE IF EXISTS `common_bill`;
+CREATE TABLE `common_bill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `billTime` datetime NOT NULL COMMENT '交易时间',
+  `billMoney` varchar(255) NOT NULL COMMENT '金额',
+  `billType` varchar(255) NOT NULL COMMENT '类型',
+  `billUser` varchar(255) NOT NULL COMMENT '用户',
+  `billNote` varchar(255) NOT NULL COMMENT '备注',
+  `billFlag` int(11) NOT NULL COMMENT '支出 or 收入 0:出 1:入',
+  `createTime` datetime NOT NULL COMMENT '记录时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of common_bill
+-- ----------------------------
+INSERT INTO `common_bill` VALUES ('1', '2019-12-12 00:00:00', '30', '支付宝', 'super', '买东西', '0', '2019-12-12 00:00:00');
+INSERT INTO `common_bill` VALUES ('2', '2019-12-12 00:00:00', '80', '微信', 'super', '充电话费', '0', '2019-12-12 00:00:00');
 
 -- ----------------------------
 -- Table structure for common_brrow_lend
@@ -84,27 +106,6 @@ INSERT INTO `common_dict` VALUES ('37', '2', '35', '冻结', null);
 INSERT INTO `common_dict` VALUES ('38', '3', '35', '已删除', null);
 
 -- ----------------------------
--- Table structure for common_income
--- ----------------------------
-DROP TABLE IF EXISTS `common_income`;
-CREATE TABLE `common_income` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `incomeTime` datetime NOT NULL COMMENT '进账时间',
-  `incomeMoney` varchar(255) NOT NULL COMMENT '金额',
-  `incomeType` varchar(255) NOT NULL COMMENT '类型',
-  `incomeUser` varchar(255) NOT NULL COMMENT '用户',
-  `incomeNote` varchar(255) NOT NULL COMMENT '备注',
-  `createTime` datetime NOT NULL COMMENT '记账时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of common_income
--- ----------------------------
-INSERT INTO `common_income` VALUES ('1', '2019-12-12 00:00:00', '40', '支付宝', 'super', '买东西', '2019-12-12 00:00:00');
-INSERT INTO `common_income` VALUES ('2', '2019-12-12 00:00:00', '80', '微信', 'super', '充电话费', '2019-12-12 00:00:00');
-
--- ----------------------------
 -- Table structure for common_login_log
 -- ----------------------------
 DROP TABLE IF EXISTS `common_login_log`;
@@ -171,7 +172,11 @@ INSERT INTO `common_menu` VALUES ('1107200493295239168', 'type/add', 'type', '11
 INSERT INTO `common_menu` VALUES ('1107200750674509824', 'type/edit', 'type', '1106919967531466752', '修改', 'type/edit', '0', '2', '4', '1', '', '2019-03-17 16:43:24', '2019-03-17 18:44:09');
 INSERT INTO `common_menu` VALUES ('1107200835726606336', 'type/delete', 'type', '1106919967531466752', '删除', 'type/delete', '0', '2', '5', '1', '', '2019-03-17 16:43:45', '2019-03-17 18:44:18');
 INSERT INTO `common_menu` VALUES ('1107209037616775168', 'type/view', 'type', '1106919967531466752', '查看', 'type/view', '0', '2', '6', '1', '', '2019-03-17 17:16:20', '2019-03-17 18:44:29');
-INSERT INTO `common_menu` VALUES ('1107223852666060800', 'bills/exportExcel', 'bills/outcome', '1106906272881442816', '导出', 'bills/exportExcel', '0', '3', '1', '1', '', '2019-03-17 18:15:12', '2019-03-17 18:17:18');
+INSERT INTO `common_menu` VALUES ('1107223852666060800', 'bills/exportExcel', 'bills', '894752734459199488', '导出', 'bills/exportExcel', '0', '2', '1', '1', '', '2019-03-17 18:15:12', '2019-03-17 22:06:12');
+INSERT INTO `common_menu` VALUES ('1107277727846629376', 'bills/edit', 'bills', '894752734459199488', '修改', 'bills/edit', '0', '2', '1', '1', '', '2019-03-17 21:49:17', '2019-03-17 22:05:53');
+INSERT INTO `common_menu` VALUES ('1107297300050345984', 'plan/remind/add', 'plan/remind', '1106924873885679616', '新增', 'plan/remind/add', '0', '3', '1', '1', '', '2019-03-17 23:07:04', null);
+INSERT INTO `common_menu` VALUES ('1107302594092466176', 'plan/remind/edit', 'plan/remind', '1106924873885679616', '修改', 'plan/remind/edit', '0', '3', '2', '1', '', '2019-03-17 23:28:06', null);
+INSERT INTO `common_menu` VALUES ('1107302682407731200', 'plan/remind/delete', 'plan/remind', '1106924873885679616', '删除', 'plan/remind/delete', '0', '3', '3', '1', '', '2019-03-17 23:28:27', null);
 INSERT INTO `common_menu` VALUES ('893287144657780736', 'system', 'root', '000000000000000000', '系统设置', 'system', '1', '1', '10', '1', 'fa fa-cog', '2017-08-04 09:47:06', '2019-03-15 15:57:18');
 INSERT INTO `common_menu` VALUES ('893288715881807872', 'userList', 'system', '893287144657780736', '用户管理', 'user/list', '1', '2', '1', '1', 'fa fa-user', '2017-08-04 09:53:21', '2019-03-15 16:00:46');
 INSERT INTO `common_menu` VALUES ('893304960282787840', 'user/add', 'userList', '893288715881807872', '用户添加', 'user/add', '0', '3', '1', '1', '', '2017-08-04 10:57:54', '2017-08-08 11:02:55');
@@ -211,25 +216,6 @@ CREATE TABLE `common_operation_log` (
 
 -- ----------------------------
 -- Records of common_operation_log
--- ----------------------------
-
--- ----------------------------
--- Table structure for common_pay
--- ----------------------------
-DROP TABLE IF EXISTS `common_pay`;
-CREATE TABLE `common_pay` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `payTime` datetime NOT NULL COMMENT '支出时间',
-  `payMoney` varchar(255) NOT NULL COMMENT '金额',
-  `payType` varchar(255) NOT NULL COMMENT '类型',
-  `payUser` varchar(255) NOT NULL COMMENT '用户',
-  `payNote` varchar(255) NOT NULL COMMENT '备注',
-  `createTime` datetime NOT NULL COMMENT '记账时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
--- ----------------------------
--- Records of common_pay
 -- ----------------------------
 
 -- ----------------------------
@@ -279,135 +265,94 @@ INSERT INTO `common_privilege` VALUES ('17', '893287144657780736', '2017-09-12 1
 INSERT INTO `common_privilege` VALUES ('17', '894477995903811584', '2017-09-12 18:52:38');
 INSERT INTO `common_privilege` VALUES ('17', '894752734459199488', '2017-09-12 18:52:38');
 INSERT INTO `common_privilege` VALUES ('17', '894769217763540992', '2017-09-12 18:52:38');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:46');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:46');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:46');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 18:20:47');
-INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 18:20:48');
-INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 18:20:49');
-INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106921511500906496', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106924873885679616', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106925336056037376', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106925513508651008', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:50');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106921511500906496', '2019-03-17 18:20:51');
-INSERT INTO `common_privilege` VALUES ('8', '1106924873885679616', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '1106925336056037376', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '1106925513508651008', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '893287144657780736', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '893288715881807872', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '893304960282787840', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894396523532517376', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894473486712438784', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894473651837992960', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '903459378655395840', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894475142061621248', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894475827880656896', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894475985452269568', '2019-03-17 18:20:52');
-INSERT INTO `common_privilege` VALUES ('8', '894476118730473472', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894476276402749440', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894476950951690240', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894477107919323136', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894477244926263296', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894477420512411648', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894477851082883072', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '894477995903811584', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 18:20:53');
-INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106921511500906496', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106924873885679616', '2019-03-17 18:20:54');
-INSERT INTO `common_privilege` VALUES ('8', '1106925336056037376', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '1106925513508651008', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '893287144657780736', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '893288715881807872', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '893304960282787840', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894396523532517376', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894473486712438784', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894473651837992960', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '903459378655395840', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894475142061621248', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894475827880656896', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894475985452269568', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894476118730473472', '2019-03-17 18:20:55');
-INSERT INTO `common_privilege` VALUES ('8', '894476276402749440', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894476950951690240', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894477107919323136', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894477244926263296', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894477420512411648', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894477851082883072', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894477995903811584', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '894752734459199488', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '1106900863944753152', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '1106906272881442816', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '1107223852666060800', '2019-03-17 18:20:56');
-INSERT INTO `common_privilege` VALUES ('8', '1106906446622097408', '2019-03-17 18:20:56');
+INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 23:28:38');
+INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 23:28:38');
+INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 23:28:38');
+INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106921511500906496', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106925336056037376', '2019-03-17 23:28:39');
+INSERT INTO `common_privilege` VALUES ('8', '1106925513508651008', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '893287144657780736', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '893288715881807872', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '893304960282787840', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894396523532517376', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894473486712438784', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894473651837992960', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '903459378655395840', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894475142061621248', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894475827880656896', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894475985452269568', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894476118730473472', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894476276402749440', '2019-03-17 23:28:40');
+INSERT INTO `common_privilege` VALUES ('8', '894476950951690240', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894477107919323136', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894477244926263296', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894477420512411648', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894477851082883072', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894477995903811584', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '894752734459199488', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106900863944753152', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106906272881442816', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106906446622097408', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1107223852666060800', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1107277727846629376', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106903030818668544', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106908605833019392', '2019-03-17 23:28:41');
+INSERT INTO `common_privilege` VALUES ('8', '1106908754596593664', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106908859693268992', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106912782072152064', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106922422579232768', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106922526077878272', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106922630637682688', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106919967531466752', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106920664020811776', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106921151260524544', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1107200493295239168', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1107200750674509824', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1107200835726606336', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1107209037616775168', '2019-03-17 23:28:42');
+INSERT INTO `common_privilege` VALUES ('8', '1106921511500906496', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1106924873885679616', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1107297300050345984', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1107302594092466176', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1107302682407731200', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1106925336056037376', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '1106925513508651008', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '893287144657780736', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '893288715881807872', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '893304960282787840', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '894396523532517376', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '894473486712438784', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '894473651837992960', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '903459378655395840', '2019-03-17 23:28:43');
+INSERT INTO `common_privilege` VALUES ('8', '894475142061621248', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894475827880656896', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894475985452269568', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894476118730473472', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894476276402749440', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894476950951690240', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894477107919323136', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894477244926263296', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894477420512411648', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894477851082883072', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894477995903811584', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '894752734459199488', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '1106900863944753152', '2019-03-17 23:28:44');
+INSERT INTO `common_privilege` VALUES ('8', '1106906272881442816', '2019-03-17 23:28:45');
+INSERT INTO `common_privilege` VALUES ('8', '1106906446622097408', '2019-03-17 23:28:45');
+INSERT INTO `common_privilege` VALUES ('8', '1107223852666060800', '2019-03-17 23:28:45');
+INSERT INTO `common_privilege` VALUES ('8', '1107277727846629376', '2019-03-17 23:28:45');
 
 -- ----------------------------
 -- Table structure for common_remind
@@ -420,11 +365,13 @@ CREATE TABLE `common_remind` (
   `status` int(1) NOT NULL COMMENT '0:完成 1:待做',
   `user` varchar(255) NOT NULL COMMENT '用户',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of common_remind
 -- ----------------------------
+INSERT INTO `common_remind` VALUES ('1', '2019-03-17 22:48:53', '打卡', '0', 'super');
+INSERT INTO `common_remind` VALUES ('3', '2019-03-18 00:00:00', '还房租', '1', 'super');
 
 -- ----------------------------
 -- Table structure for common_role

@@ -44,6 +44,7 @@ public class TypeMgrController extends BaseController {
         modelAndView.setViewName("/type/add");
         return modelAndView;
     }
+
     @RequestMapping(value = "edit/{id}",method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView,@PathVariable Integer id){
         Result<DealType> result = service.selectById(id);
