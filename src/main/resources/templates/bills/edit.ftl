@@ -24,7 +24,7 @@
                     <select type="text" class="form-control" name="billNote" id="billNote">
                         <#list type as obj>
                             <option <#if bean.billNote== obj.type> selected </#if>
-                                    <#if obj.inOrOut == 0> value="${obj.type}" >${obj.type} </#if> </option>
+                                    <#if obj.inOrOut == 0> value="${obj.type}" </#if> >${obj.type}  </option>
                         </#list>
                     </select>
                 </div>
