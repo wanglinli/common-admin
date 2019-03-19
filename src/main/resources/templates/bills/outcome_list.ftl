@@ -83,14 +83,12 @@
 //					debugger;
                         var btn = "";
                         btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
-                        if (isNull(data.role) || 'super' != data.role.value) {
-                            btn += '<@shiro.hasPermission name="bills/edit">'
-                                + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" data-title="修改" target="modal" modal="lg" href="/bills/edit/'+ data.id+ '">修改</a> &nbsp;'
-                                +'</@shiro.hasPermission>'
-                                + '<@shiro.hasPermission name="user/delete">'
-                                + '<a class="btn btn-xs btn-default" callback="securityReload();" data-body="确认要删除吗？" target="ajaxTodo" href="/user/delete/'+ data.id + '">删除</a>'
-                                +'</@shiro.hasPermission>';
-                        }
+                        btn += '<@shiro.hasPermission name="bills/edit">'
+                            + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" data-title="修改" target="modal" modal="lg" href="/bills/edit/'+ data.id+ '">修改</a> &nbsp;'
+                            +'</@shiro.hasPermission>'
+                            + '<@shiro.hasPermission name="bills/delete">'
+                            + '<a class="btn btn-xs btn-default" callback="securityReload();" data-body="确认要删除吗？" target="ajaxTodo" href="/bills/delete/'+ data.id + '">删除</a>'
+                            +'</@shiro.hasPermission>';
                         return btn;
                     }
                 }]

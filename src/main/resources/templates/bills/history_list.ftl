@@ -2,26 +2,26 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">历史账单</h3>
-
+                <h3 class="box-title">历史列表</h3>
                 <div class="box-tools pull-left">
-                <@shiro.hasPermission name="user/add">
-                    <a onclick="securityToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg"
-                       href="/user/add">添加</a>
-				</@shiro.hasPermission>
-                    <a class="btn btn-sm btn-primary" href="/user/exportExcel">导出</a>
+                    <@shiro.hasPermission name="bills/exportExcel">
+                        <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>
+                    </@shiro.hasPermission>
                 </div>
             </div>
             <div class="box-body">
-                <table id="bills_history_tab" class="table table-bordered table-striped" style="margin-top: 10px">
+                <table id="bills_history_tab" class="table table-bordered table-striped" >
                     <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>创建时间</th>
-                            <th>金额</th>
-                            <th>交易方式</th>
-                            <th>交易说明</th>
-                        </tr>
+                    <tr>
+                        <th>序号</th>
+                        <th>收入时间</th>
+                        <th>创建时间</th>
+                        <th>金额</th>
+                        <th>交易方式</th>
+                        <th>交易说明</th>
+                        <th>支出or收入</th>
+                        <th>操作</th>
+                    </tr>
                     </thead>
                 </table>
             </div>
@@ -50,20 +50,18 @@
             "bInfo": false,
             "language": {"url": "adminlte/plugins/datatables/language.json"},
             "ajax": {
-                "url": "/user/page",
+                "url": "/bills/page",
                 "type": "post",
-                "data": function(d) {
-                    //自定义查询参数
-                    d.roleId = $("#roleId").val();
-                }
+                "data":{"billFlag":2}
             },
             "columns": [
                 {"data": null},
-                {"data": "username"},
-                {"data": "name"},
-                {"data": null},
-                {"data": null},
+                {"data": "billTime"},
                 {"data": "createTime"},
+                {"data": "billMoney"},
+                {"data": "billType"},
+                {"data": "billNote"},
+                {"data": null},
                 {"data": null}
             ],
             "columnDefs": [
@@ -74,55 +72,24 @@
                         No = No + 1;
                         return No;
                     }
-                },
-                {
-                    targets: 3,
+                }, {
+                    targets: -2,
                     data: null,
                     render: function (data) {
-                        var listStr = "";
-                        var list = data.roleList;
-                        if (list) {
-                            for (var i = 0; i < list.length; i++) {
-                                listStr += list[i].name + ";";
-                            }
+                        if (data.billFlag == 0){
+                            return "支出记录";
+                        }else if (data.billFlag == 1){
+                            return "收入记录";
+                        }else {
+                            return "未知";
                         }
-                        return listStr;
                     }
-                },
-                {
-                    targets: 4,
-                    data: null,
-                    render: function (data) {
-                        if (data.status == 0) {
-                            return "不可用";
-                        }
-                        if (data.status == 1) {
-                            return "可用";
-                        }
-                        return "未知状态";
-                    }
-                },
-                {
+                }, {
                     "targets": -1,
                     "data": null,
                     "render": function (data) {
-//					debugger;
                         var btn = "";
                         btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
-                        if (isNull(data.role) || 'super' != data.role.value) {
-                            btn += '<@shiro.hasPermission name="user/edit">'
-                                    + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" data-title="修改" target="modal" modal="lg" href="/user/edit/'+ data.id+ '">修改</a> &nbsp;'
-                                    +'</@shiro.hasPermission>'
-                                    + '<@shiro.hasPermission name="user/edit">'
-                                    + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" target="modal" modal="lg" href="/user/goResetPwd/'+ data.id+ '">重置密码</a> &nbsp;'
-                                    +'</@shiro.hasPermission>'
-                                    + '<@shiro.hasPermission name="user/edit">'
-                                    + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" target="modal" modal="lg" href="/user/goDispatcherRole/'+ data.id+ '">角色分配</a> &nbsp;'
-                                    +'</@shiro.hasPermission>'
-                                    + '<@shiro.hasPermission name="user/delete">'
-                                    + '<a class="btn btn-xs btn-default" callback="securityReload();" data-body="确认要删除吗？" target="ajaxTodo" href="/user/delete/'+ data.id + '">删除</a>'
-                                    +'</@shiro.hasPermission>';
-                        }
                         return btn;
                     }
                 }]

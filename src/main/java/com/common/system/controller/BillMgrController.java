@@ -76,7 +76,12 @@ public class BillMgrController extends BaseController{
         Bill bill = new Bill();
         bill.setBillUser(shiroUser.getUsername());
         bill.setBillFlag(billFlag);
-        PageInfo<Bill> pageInfo = billService.listForPage((start / pageSize) + 1, pageSize,bill);
+        PageInfo<Bill> pageInfo;
+        if (billFlag == 0 || billFlag ==1){
+            pageInfo = billService.listForPage((start / pageSize) + 1, pageSize,bill);
+        }else {
+            pageInfo = billService.queryAll();
+        }
         return new PageBean<>(pageInfo);
     }
 
