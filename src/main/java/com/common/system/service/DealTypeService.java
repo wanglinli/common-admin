@@ -8,14 +8,11 @@ import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
-/**
- * Created by Mr.Yangxiufeng on 2017/6/22.
- * Time:14:15
- * ProjectName:Common-admin
- */
 public interface DealTypeService {
 
-    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut);
+    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut,String user);
+
+//    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize);
 
     Result<DealType> deleteById(Integer id);
 
@@ -25,8 +22,6 @@ public interface DealTypeService {
 
     Result<Integer> update(DealType type);
 
-    List<DealType> selectInOrOut(Integer inOrOut);
-
-    List<DealType> queryAll();
+    List<DealType> queryAllByUser(String user);
 
 }

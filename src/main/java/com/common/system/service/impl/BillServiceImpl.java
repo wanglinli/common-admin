@@ -19,15 +19,20 @@ public class BillServiceImpl implements BillService {
     private BillMapper mapper;
 
     @Override
-    public PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize,Bill bill) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<Bill> roleList = mapper.getbillBill();
+        List<Bill> roleList = mapper.getbillBill(bill);
 
-        return new PageInfo<Bill>(roleList);
+        return new PageInfo<>(roleList);
     }
 
+    @Override
+    public PageInfo<Bill> queryAll() {
+        List<Bill> roleList = mapper.queryAll();
+        return new PageInfo<>(roleList);
+    }
 
 
     @Override

@@ -139,7 +139,17 @@
 //					debugger;
                         var btn = "";
                         btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
-                        if (isNull(data.role) || 'super' != data.role.value) {
+                        var list = data.roleList;
+                        var flag = false;
+                        if (list) {
+                            for (var i = 0; i < list.length; i++) {
+                                if (list[i].value != 'super'){
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (flag) {
                             btn += '<@shiro.hasPermission name="user/edit">'
                                     + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" data-title="修改" target="modal" modal="lg" href="/user/edit/'+ data.id+ '">修改</a> &nbsp;'
                                     +'</@shiro.hasPermission>'

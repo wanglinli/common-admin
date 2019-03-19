@@ -2,8 +2,10 @@ package com.common.system.controller;
 
 
 import com.common.system.entity.DealType;
+import com.common.system.entity.RcRole;
 import com.common.system.entity.RcUser;
 import com.common.system.service.DealTypeService;
+import com.common.system.shiro.ShiroUser;
 import com.common.system.util.Convert;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -64,8 +67,9 @@ public class TypeMgrController extends BaseController {
 
     @RequestMapping(value = "save")
     public @ResponseBody
-    Result save(String id,String type, String note,String inOrOut){
-        DealType dealType = getDealType(id,type, note, Integer.valueOf(inOrOut));
+    Result save(String id, String type, String note, String inOrOut, HttpSession session){
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
+        DealType dealType = getDealType(id,type, note, Integer.valueOf(inOrOut),user.getUsername());
         return service.save(dealType);
     }
 
@@ -77,20 +81,22 @@ public class TypeMgrController extends BaseController {
 
     @RequestMapping(value = "update")
     public @ResponseBody
-    Result update(String id,String type, String note,int inOrOut){
-        DealType dealType = getDealType(id,type, note, inOrOut);
+    Result update(String id,String type, String note,int inOrOut,HttpSession session){
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
+        DealType dealType = getDealType(id,type, note, inOrOut,user.getUsername());
         return service.update(dealType);
     }
 
 
 
-    private DealType getDealType(String id,String type, String note, int inOrOut) {
+    private DealType getDealType(String id,String type, String note, int inOrOut,String user) {
         DealType dealType = new DealType();
         dealType.setId(id);
         dealType.setNote(note);
         dealType.setType(type);
         dealType.setInOrOut(inOrOut);
         dealType.setCreateTime(new Date());
+        dealType.setUser(user);
         return dealType;
     }
 
@@ -99,8 +105,10 @@ public class TypeMgrController extends BaseController {
     @RequestMapping(value = "page")
     public PageBean<DealType> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
                                          @RequestParam(value = "length", defaultValue = "10") int pageSize,
-                                           @RequestParam(value = "inOrOut") int inOrOut) {
-        PageInfo<DealType> pageInfo = service.listForPage((start / pageSize) + 1, pageSize,inOrOut);
+                                         @RequestParam(value = "inOrOut") int inOrOut,HttpSession session) {
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
+        PageInfo<DealType> pageInfo;
+        pageInfo =  service.listForPage((start / pageSize) + 1, pageSize,inOrOut,user.getUsername());
         return new PageBean<>(pageInfo);
     }
 

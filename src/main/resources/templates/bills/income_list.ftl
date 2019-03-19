@@ -15,35 +15,8 @@
                 </div>
             </div>
             <div class="box-body">
-			<#--<div class="clearfix">-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group date ">-->
-			<#--<div class="input-group-addon">-->
-			<#--<i class="fa fa-calendar"></i>-->
-			<#--</div>-->
-			<#--<input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group">-->
-			<#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
-			<#--<input type="text" class="form-control" id="securityPremise" placeholder="根据账号搜索...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<div class="input-group">-->
-			<#--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
-			<#--<input type="text" class="form-control" id="roleId" placeholder="根据角色搜索...">-->
-			<#--</div>-->
-			<#--</div>-->
-			<#--<div class="col-md-3">-->
-			<#--<button type="submit" onclick="securityReload();" class="btn btn-primary">搜索</button>-->
-			<#--</div>-->
-			<#--</div>-->
-
                 <table id="bills_income_tab" class="table table-bordered table-striped" >
                     <thead>
-                    <tr>
                     <tr>
                         <th>序号</th>
                         <th>收入时间</th>
@@ -52,7 +25,6 @@
                         <th>交易方式</th>
                         <th>交易说明</th>
                         <th>操作</th>
-                    </tr>
                     </tr>
                     </thead>
                 </table>
@@ -84,10 +56,7 @@
             "ajax": {
                 "url": "/bills/page",
                 "type": "post",
-                "data": function(d) {
-                    //自定义查询参数
-                    d.roleId = $("#roleId").val();
-                }
+                "data":{"billFlag":1}
             },
             "columns": [
                 {"data": null},
@@ -111,7 +80,6 @@
                     "targets": -1,
                     "data": null,
                     "render": function (data) {
-//					debugger;
                         var btn = "";
                         btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
                         if (isNull(data.role) || 'super' != data.role.value) {

@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "role")
-public class    RoleMgrController extends BaseController{
+public class RoleMgrController extends BaseController{
 
     @Autowired
     private RoleService roleService;
@@ -45,6 +45,10 @@ public class    RoleMgrController extends BaseController{
     }
     @RequestMapping(value = "delete/{id}",method = RequestMethod.GET)
     public @ResponseBody String delete(@PathVariable Integer id){
+        RcRole rcRole = roleService.selectById(id).getData();
+        if ("super".equals(rcRole.getValue())){
+            return "超级用户不允许删除!";
+        }
         roleService.deleteById(id);
         //删除角色与权限的关系
         privilegeService.deleteByRoleId(id);

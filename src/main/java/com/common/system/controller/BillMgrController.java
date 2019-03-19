@@ -7,6 +7,7 @@ import cn.afterturn.easypoi.view.PoiBaseView;
 import com.common.system.entity.Bill;
 import com.common.system.service.BillService;
 import com.common.system.service.DealTypeService;
+import com.common.system.shiro.ShiroUser;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,16 +70,21 @@ public class BillMgrController extends BaseController{
     @ResponseBody
     @RequestMapping(value = "page")
     public PageBean<Bill> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
-                                       @RequestParam(value = "length", defaultValue = "10") int pageSize) {
-            PageInfo<Bill> pageInfo = billService.listForPage((start / pageSize) + 1, pageSize);
-        return new PageBean<Bill>(pageInfo);
+                                       @RequestParam(value = "length", defaultValue = "10") int pageSize,
+                                       @RequestParam(value = "billFlag", defaultValue = "10") int billFlag,HttpSession session) {
+        ShiroUser shiroUser = (ShiroUser) session.getAttribute("user");
+        Bill bill = new Bill();
+        bill.setBillUser(shiroUser.getUsername());
+        bill.setBillFlag(billFlag);
+        PageInfo<Bill> pageInfo = billService.listForPage((start / pageSize) + 1, pageSize,bill);
+        return new PageBean<>(pageInfo);
     }
 
 
     @RequestMapping(value = "exportExcel", method = RequestMethod.GET)
     public void exportExcel(ModelMap modelMap, HttpServletRequest request,
                             HttpServletResponse response) {
-        PageInfo<Bill> result = billService.listForPage(null, null);
+        PageInfo<Bill> result = billService.queryAll();
         ExportParams params = new ExportParams("支出信息", null, ExcelType.XSSF);
         modelMap.put(NormalExcelConstants.DATA_LIST, result.getList());
         modelMap.put(NormalExcelConstants.CLASS, Bill.class);
@@ -88,10 +95,11 @@ public class BillMgrController extends BaseController{
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(@PathVariable Integer id, ModelAndView modelAndView) {
+    public ModelAndView edit(@PathVariable Integer id, ModelAndView modelAndView, HttpSession session) {
         Result<Bill> result = billService.selectById(id);
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
             modelAndView.addObject("bean", result.getData());
-            modelAndView.addObject("type", dealTypeService.queryAll());
+            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername()));
         modelAndView.setViewName("/bills/edit");
         return modelAndView;
     }

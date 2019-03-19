@@ -19,13 +19,25 @@ public class DealTypeServiceImpl implements DealTypeService {
     private DealTypeMapper mapper;
 
     @Override
-    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut) {
+    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut,String user) {
         if (pageNum != null && pageSize != null){
             PageHelper.startPage(pageNum,pageSize);
         }
-        List<DealType> roleList = mapper.getDealTypesByInOrOut(inOrOut);
+        DealType dealType = new DealType();
+        dealType.setUser(user);
+        dealType.setInOrOut(inOrOut);
+        List<DealType> roleList = mapper.getDealTypesByInOrOut(dealType);
         return new PageInfo<>(roleList);
     }
+
+//    @Override
+//    public PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize) {
+//        if (pageNum != null && pageSize != null){
+//            PageHelper.startPage(pageNum,pageSize);
+//        }
+//        List<DealType> roleList = mapper.queryAll();
+//        return new PageInfo<>(roleList);
+//    }
 
     @Override
     public Result<DealType> deleteById(Integer id) {
@@ -68,21 +80,16 @@ public class DealTypeServiceImpl implements DealTypeService {
     }
 
     @Override
-    public List<DealType> selectInOrOut(Integer inOrOut) {
-        return mapper.getDealTypesByInOrOut(inOrOut);
-    }
-
-    @Override
-    public List<DealType> queryAll() {
-        return mapper.queryAll();
+    public List<DealType> queryAllByUser(String user) {
+        return mapper.queryAllByUser(user);
     }
 
     private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
         if (res > 0){
+            result.setMsg("成功!");
             result.setData(res);
             result.setStatus(true);
             result.setCode(0);
-            result.setMsg("成功!");
         }
         return result;
     }

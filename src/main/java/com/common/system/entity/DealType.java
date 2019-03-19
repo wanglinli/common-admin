@@ -25,6 +25,8 @@ public class DealType {
 
     private String note;
 
+    private String user;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
@@ -50,6 +52,14 @@ public class DealType {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Date getCreateTime() {

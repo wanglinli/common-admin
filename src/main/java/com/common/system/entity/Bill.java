@@ -27,6 +27,10 @@ public class Bill extends Model<Bill> implements Serializable {
     private String billUser;
     @Excel(name="交易说明")
     private String billNote;
+    /**
+     * 支出还是收入 0出：１入
+     */
+    private int billFlag;
     @Excel(name="创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
@@ -90,5 +94,13 @@ public class Bill extends Model<Bill> implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public int getBillFlag() {
+        return billFlag;
+    }
+
+    public void setBillFlag(int billFlag) {
+        this.billFlag = billFlag;
     }
 }

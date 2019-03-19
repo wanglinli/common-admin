@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.view.PoiBaseView;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.common.system.entity.RcRole;
 import com.common.system.entity.RcRoleWrapper;
 import com.common.system.entity.RcUser;
 import com.common.system.entity.RcUserRole;
@@ -12,6 +13,7 @@ import com.common.system.service.RcUserRoleService;
 import com.common.system.service.RoleService;
 import com.common.system.service.UserService;
 import com.common.system.shiro.ShiroKit;
+import com.common.system.shiro.ShiroUser;
 import com.common.system.util.MsgCode;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +71,14 @@ public class UserMgrController extends BaseController {
     public
     @ResponseBody
     Result delete(@PathVariable Integer id) {
+        Result<String> result = new Result<>();
+        RcUser rcUser = userService.getById(id).getData();
+        for (RcRole role:rcUser.getRoleList()) {
+            if ("super".equals(role.getValue())){
+                result.setMsg("超级用户不允许删除!");
+                return result;
+            }
+        }
         return userService.deleteById(id);
     }
 

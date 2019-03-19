@@ -14,7 +14,9 @@ import java.util.List;
  */
 public interface BillService {
 
-    PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize);
+    PageInfo<Bill> listForPage(Integer pageNum, Integer pageSize,Bill bill);
+
+    PageInfo<Bill> queryAll();
 
     int deleteById(Integer id);
 
