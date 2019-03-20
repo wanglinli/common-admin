@@ -25,9 +25,7 @@
 		</div>
 	</div>
 </div>
-<div style="display: none">
-	<label for="user">username</label>
-	<input id="user" value="${user.username}"/></div>
+
 <script type="text/javascript">
 var remind_tab;
 $(function() {
@@ -40,7 +38,7 @@ $(function() {
 		"serverSide":true, //启用服务器端分页
 		"bInfo":false,
 		"language":{"url":"adminlte/plugins/datatables/language.json"},
-		"ajax":{"url":"/plan/remind/page","type":"post","data":{"user":$('#user').val()}},
+		"ajax":{"url":"/plan/remind/page","type":"post"},
 		"columns":[ 
 		    {"data":null}, 
 			{"data":"time"},
