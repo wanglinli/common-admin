@@ -26,7 +26,7 @@ public interface BillService {
 
     Bill selectByRoleValue(String roleValue);
 
-    Result<Integer> save(Bill type, List<Integer> permissionIds);
+    Result<Integer> save(Bill bill);
 
     Result<Integer> update(Bill type);
 

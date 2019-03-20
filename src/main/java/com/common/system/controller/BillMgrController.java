@@ -15,6 +15,7 @@ import com.xiaoleilu.hutool.date.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -130,5 +131,47 @@ public class BillMgrController extends BaseController{
         }
         bill.setCreateTime(new Date());
         return  billService.update(bill);
+    }
+
+
+    @RequestMapping(value = "add/{billFlag}", method = RequestMethod.GET)
+    public ModelAndView add(@PathVariable String billFlag,ModelAndView modelAndView, HttpSession session) {
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
+        if("in".equalsIgnoreCase(billFlag)){
+            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),0));
+        } else {
+            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),1));
+        }
+        modelAndView.setViewName("/bills/add");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "save")
+    public @ResponseBody
+    Result save(String billTime, String billMoney, String billType, String billNote, String billFlag, HttpSession session){
+        ShiroUser user = (ShiroUser) session.getAttribute("user");
+        Bill bill  = getBill(billTime,billMoney,billType,billNote,user.getUsername(),billFlag);
+        return billService.save(bill);
+    }
+
+
+    public  static Bill  getBill(String billTime,String billMoney, String billType, String billNote, String userName,String billFlag){
+        Bill bill = new Bill();
+        if(!StringUtils.isEmpty(billTime)){
+            try {
+                bill.setBillTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(billTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                }
+        }
+
+        if(!StringUtils.isEmpty(billMoney)) bill.setBillMoney(billMoney);
+        if(!StringUtils.isEmpty(billType)) bill.setBillType(billType);
+        if (!StringUtils.isEmpty(billNote)) bill.setBillNote(billNote);
+        if(!StringUtils.isEmpty(userName)) bill.setBillUser(userName);
+        if(!StringUtils.isEmpty(billFlag)) bill.setBillFlag(Integer.parseInt(billFlag));
+        bill.setCreateTime(new Date());
+        return bill;
     }
 }

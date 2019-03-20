@@ -5,9 +5,9 @@
                 <h3 class="box-title">收入列表</h3>
 
                 <div class="box-tools pull-left">
-                <@shiro.hasPermission name="user/add">
+                <@shiro.hasPermission name="bills/add">
                     <a onclick="securityToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg"
-                       href="/user/add">添加</a>
+                       href="/bills/add/in">添加</a>
 				</@shiro.hasPermission>
                 <@shiro.hasPermission name="bills/exportExcel">
                     <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>

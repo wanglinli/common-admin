@@ -64,8 +64,9 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public Result<Integer> save(Bill type, List<Integer> permissionIds) {
-        return null;
+    public Result<Integer> save(Bill bill) {
+        int res = mapper.save(bill);
+        return getIntegerResult(new Result<Integer>(),res);
     }
 
     @Override
