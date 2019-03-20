@@ -13,14 +13,12 @@
 				<table id="role_tab" class="table table-bordered table-striped">
 					<thead>
 						<tr>
-							<tr>
-								<th>序号</th>
-								<th>角色</th>
-								<th>角色值</th>
-								<th>状态</th>
-								<th>创建时间</th>
-								<th>操作</th>
-							</tr>
+							<th>序号</th>
+							<th>角色</th>
+							<th>角色值</th>
+							<th>状态</th>
+							<th>创建时间</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 				</table>
@@ -78,8 +76,7 @@ $(function() {
 				"data" : null,
 				"render" : function(data) {
 					var btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/role/view/'+ data.id+ '">查看</a> &nbsp;';
-						if(data.value != 'super'){
-							btn = btn+'<@shiro.hasPermission name="role/edit">'
+					btn = btn+'<@shiro.hasPermission name="role/edit">'
 							+'<a class="btn btn-xs btn-info" onclick="roleToListAjax();" target="modal" modal="lg" href="/role/edit/'+ data.id+'">修改</a> &nbsp;'
 							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="role/delete">'
@@ -87,8 +84,7 @@ $(function() {
 							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="role/permission">'
 							+'<a class="btn btn-xs btn-info" onclick="roleToListAjax();" target="modal" modal="lg" href="/role/permission/'+ data.id+'">权限配置</a>';
-								+'</@shiro.hasPermission>'
-						}
+					+'</@shiro.hasPermission>'
 				return btn;
 			}
 		} ]
