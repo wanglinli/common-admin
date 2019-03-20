@@ -2,23 +2,38 @@
 	<div class="box-body  no-padding">
 		<table class="table table-striped">
 			<tr>
-				<td>时间：</td>
-				<td style="width: 90%">${bean.time?string('yyyy-MM-dd HH:mm:ss')}</td>
+				<td>开始时间：</td>
+				<td style="width: 90%">${bean.startTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 			</tr>
 			<tr>
-				<td>提醒内容：</td>
-				<td>${bean.content!}</td>
+				<td>借贷项目：</td>
+				<td>${bean.toLoan!}</td>
 			</tr>
 			<tr>
-				<td>当前状态:</td>
+				<td>借贷利息:</td>
 				<td>
-					<#if bean.status == 0>完成</#if>
-					<#if bean.status == 1>待做</#if>
+					${bean.interest!} 元
 				</td>
+			</tr>
+			<tr>
+				<td>借贷年限：</td>
+				<td>${bean.life!}</td>
+			</tr>
+			<tr>
+				<td>已还金额：</td>
+				<td>${bean.alreadyRepaid!} 元</td>
+			</tr>
+			<tr>
+				<td>剩余待还金额：</td>
+				<td>${bean.surplus!} 元</td>
 			</tr>
 			<tr>
 				<td>用户：</td>
 				<td>${bean.user}</td>
+			</tr>
+			<tr>
+				<td>记录时间：</td>
+				<td style="width: 90%">${bean.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
 			</tr>
 
 		</table>

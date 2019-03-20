@@ -141,6 +141,14 @@ public class PlanMgrController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "toloan/view/{id}", method = RequestMethod.GET)
+    public ModelAndView viewToLoan(@PathVariable Integer id, ModelAndView modelAndView) {
+        Result<ToLoan> result = toLoanService.selectById(id);
+        modelAndView.addObject("bean", result.getData());
+        modelAndView.setViewName("/plan/toloan/view");
+        return modelAndView;
+    }
+
 
     @RequestMapping(value = "toloan/save")
     public @ResponseBody
