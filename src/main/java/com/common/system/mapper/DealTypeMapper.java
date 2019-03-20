@@ -15,9 +15,6 @@ public interface DealTypeMapper {
     @Select("select * from common_deal_type")
     List<DealType> queryAll();
 
-    @Select("select * from common_deal_type where user=#{user}")
-    List<DealType> queryAllByUser(String user);
-
 
     @Insert("insert into common_deal_type(type,note,inOrOut,createTime,user) values(#{type},#{note},#{inOrOut},#{createTime},#{user})")
     Integer save(DealType dealType);

@@ -23,22 +23,10 @@
                     <label for="billNote" id="billNote">交易说明</label>
                     <select type="text" class="form-control" name="billNote" id="billNote">
                         <#list type as obj>
-                            <#assign flag="">
-                            <#if obj.inOrOut == 0>
-                                <option <#if bean.billNote == obj.type> selected </#if>>
-                                    <#--只展示收入类型-->
-                                    <#assign flag="yes">
-                                    ${obj.type}
-                                </option>
-                            </#if>
-                            <#if obj.inOrOut == 1>
-                                <#if flag="yes">
-                                    <option <#if bean.billNote == obj.type> selected </#if>>
-                                        <#--只展示支出类型-->
-                                        ${obj.type}
-                                    </option>
-                                </#if>
-                            </#if>
+                            <option <#if bean.billNote == obj.type> selected </#if>>
+                                <#--只展示收入类型-->
+                                ${obj.type}
+                            </option>
                         </#list>
                     </select>
                 </div>

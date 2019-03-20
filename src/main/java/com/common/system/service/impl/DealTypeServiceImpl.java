@@ -80,8 +80,11 @@ public class DealTypeServiceImpl implements DealTypeService {
     }
 
     @Override
-    public List<DealType> queryAllByUser(String user) {
-        return mapper.queryAllByUser(user);
+    public List<DealType> queryAllByUser(String user,int flag) {
+        DealType dealType = new DealType();
+        dealType.setUser(user);
+        dealType.setInOrOut(flag);
+        return mapper.getDealTypesByInOrOut(dealType);
     }
 
     private Result<Integer> getIntegerResult(Result<Integer> result, int res) {

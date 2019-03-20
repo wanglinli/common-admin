@@ -100,11 +100,17 @@ public class BillMgrController extends BaseController{
     }
 
     @RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(@PathVariable Integer id, ModelAndView modelAndView, HttpSession session) {
-        Result<Bill> result = billService.selectById(id);
+    public ModelAndView edit(@PathVariable String id, ModelAndView modelAndView, HttpSession session) {
+        String idStr = id.split("-")[0];
+        String flag = id.split("-")[1];
+        Result<Bill> result = billService.selectById(Integer.parseInt(idStr));
         ShiroUser user = (ShiroUser) session.getAttribute("user");
-            modelAndView.addObject("bean", result.getData());
-            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername()));
+        modelAndView.addObject("bean", result.getData());
+        if ("in".equals(flag)){
+            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),0));
+        }else {
+            modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),1));
+        }
         modelAndView.setViewName("/bills/edit");
         return modelAndView;
     }

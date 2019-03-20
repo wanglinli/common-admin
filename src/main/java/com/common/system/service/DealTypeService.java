@@ -12,7 +12,6 @@ public interface DealTypeService {
 
     PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize,int inOrOut,String user);
 
-//    PageInfo<DealType> listForPage(Integer pageNum, Integer pageSize);
 
     Result<DealType> deleteById(Integer id);
 
@@ -22,6 +21,6 @@ public interface DealTypeService {
 
     Result<Integer> update(DealType type);
 
-    List<DealType> queryAllByUser(String user);
+    List<DealType> queryAllByUser(String user,int flag);
 
 }
