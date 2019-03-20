@@ -1,7 +1,7 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.RcPrivilege;
-import com.common.system.entity.RcPrivilegeExample;
+import com.common.system.entity.system.RcPrivilege;
+import com.common.system.entity.system.RcPrivilegeExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

@@ -1,7 +1,7 @@
 package com.common.system.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.common.system.entity.RcUser;
+import com.common.system.entity.system.RcUser;
 
 import org.apache.ibatis.annotations.Mapper;
 

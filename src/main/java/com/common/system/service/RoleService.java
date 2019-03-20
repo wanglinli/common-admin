@@ -1,7 +1,7 @@
 package com.common.system.service;
 
-import com.common.system.entity.RcRole;
-import com.common.system.entity.RcRoleWrapper;
+import com.common.system.entity.system.RcRole;
+import com.common.system.entity.system.RcRoleWrapper;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
 

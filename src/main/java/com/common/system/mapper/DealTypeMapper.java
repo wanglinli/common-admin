@@ -1,6 +1,6 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.DealType;
+import com.common.system.entity.finance.DealType;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.system;
 
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;

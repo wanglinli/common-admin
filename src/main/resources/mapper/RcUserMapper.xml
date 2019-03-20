@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.common.system.mapper.RcUserMapper">
-  <resultMap id="BaseResultMap" type="com.common.system.entity.RcUser">
+  <resultMap id="BaseResultMap" type="com.common.system.entity.system.RcUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -25,7 +25,7 @@
     from common_user
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.system.RcUser">
     update common_user
     <set>
       <if test="avatar != null">

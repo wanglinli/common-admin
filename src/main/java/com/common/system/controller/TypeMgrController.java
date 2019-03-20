@@ -1,12 +1,9 @@
 package com.common.system.controller;
 
 
-import com.common.system.entity.DealType;
-import com.common.system.entity.RcRole;
-import com.common.system.entity.RcUser;
+import com.common.system.entity.finance.DealType;
 import com.common.system.service.DealTypeService;
 import com.common.system.shiro.ShiroUser;
-import com.common.system.util.Convert;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
@@ -17,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "type")

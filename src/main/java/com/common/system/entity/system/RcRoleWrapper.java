@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.system;
 
 public class RcRoleWrapper extends RcRole {
 

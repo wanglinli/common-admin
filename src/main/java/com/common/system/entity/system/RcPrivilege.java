@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.system;
 
 import java.io.Serializable;
 import java.util.Date;

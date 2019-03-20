@@ -1,7 +1,7 @@
 package com.common.system.shiro;
 
-import com.common.system.entity.RcPrivilege;
-import com.common.system.entity.RcRole;
+import com.common.system.entity.system.RcPrivilege;
+import com.common.system.entity.system.RcRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.RcMenu;
-import com.common.system.entity.TreeGridNode;
+import com.common.system.entity.system.RcMenu;
+import com.common.system.entity.system.TreeGridNode;
 import com.common.system.service.MenuService;
 import com.common.system.service.TreeGridService;
 import org.apache.commons.logging.Log;

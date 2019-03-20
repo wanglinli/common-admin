@@ -1,7 +1,7 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.Bill;
-import com.common.system.entity.RcRoleWrapper;
+import com.common.system.entity.finance.Bill;
+import com.common.system.entity.system.RcRoleWrapper;
 import com.common.system.mapper.BillMapper;
 import com.common.system.service.BillService;
 import com.common.system.util.Result;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.common.system.mapper.RcMenuMapper">
-  <resultMap id="BaseResultMap" type="com.common.system.entity.RcMenu">
+  <resultMap id="BaseResultMap" type="com.common.system.entity.system.RcMenu">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="p_code" jdbcType="VARCHAR" property="pCode" />
@@ -78,7 +78,7 @@
     id, code, p_code, p_id, name, url, is_menu, level, sort, status, icon, create_time, 
     update_time
   </sql>
-  <select id="selectByExample" parameterType="com.common.system.entity.RcMenuExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.common.system.entity.system.RcMenuExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -102,13 +102,13 @@
     delete from common_menu
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.common.system.entity.RcMenuExample">
+  <delete id="deleteByExample" parameterType="com.common.system.entity.system.RcMenuExample">
     delete from common_menu
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.common.system.entity.RcMenu">
+  <insert id="insert" parameterType="com.common.system.entity.system.RcMenu">
     insert into common_menu (id, code, p_code, 
       p_id, name, url, is_menu, 
       level, sort, status, 
@@ -120,7 +120,7 @@
       #{icon,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.common.system.entity.RcMenu">
+  <insert id="insertSelective" parameterType="com.common.system.entity.system.RcMenu">
     insert into common_menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -271,7 +271,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcMenu">
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.system.RcMenu">
     update common_menu
     <set>
       <if test="code != null">
@@ -313,7 +313,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.common.system.entity.RcMenu">
+  <update id="updateByPrimaryKey" parameterType="com.common.system.entity.system.RcMenu">
     update common_menu
     set code = #{code,jdbcType=VARCHAR},
       p_code = #{pCode,jdbcType=VARCHAR},

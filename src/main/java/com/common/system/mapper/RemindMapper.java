@@ -1,6 +1,6 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.Remind;
+import com.common.system.entity.finance.Remind;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

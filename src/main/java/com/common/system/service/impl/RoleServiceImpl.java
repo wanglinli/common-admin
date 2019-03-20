@@ -1,8 +1,8 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.RcRole;
-import com.common.system.entity.RcRoleExample;
-import com.common.system.entity.RcRoleWrapper;
+import com.common.system.entity.system.RcRole;
+import com.common.system.entity.system.RcRoleExample;
+import com.common.system.entity.system.RcRoleWrapper;
 import com.common.system.mapper.RcRoleMapper;
 import com.common.system.service.RoleService;
 import com.common.system.util.MsgCode;

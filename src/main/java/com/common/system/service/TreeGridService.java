@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.TreeGridNode;
+import com.common.system.entity.system.TreeGridNode;
 
 import java.util.List;
 

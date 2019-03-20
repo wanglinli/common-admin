@@ -1,8 +1,8 @@
 package com.common.system.controller;
 
-import com.common.system.entity.RcPrivilege;
-import com.common.system.entity.RcRole;
-import com.common.system.entity.ZTreeNode;
+import com.common.system.entity.system.RcPrivilege;
+import com.common.system.entity.system.RcRole;
+import com.common.system.entity.system.ZTreeNode;
 import com.common.system.service.*;
 import com.common.system.util.Convert;
 import com.common.system.util.PageBean;

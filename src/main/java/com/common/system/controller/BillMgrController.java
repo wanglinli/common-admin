@@ -4,7 +4,7 @@ import cn.afterturn.easypoi.entity.vo.NormalExcelConstants;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import cn.afterturn.easypoi.view.PoiBaseView;
-import com.common.system.entity.Bill;
+import com.common.system.entity.finance.Bill;
 import com.common.system.service.BillService;
 import com.common.system.service.DealTypeService;
 import com.common.system.shiro.ShiroUser;

@@ -1,7 +1,7 @@
 package com.common.system.service.impl;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.common.system.entity.RcUserRole;
+import com.common.system.entity.system.RcUserRole;
 import com.common.system.mapper.RcUserRoleMapper;
 import com.common.system.service.RcUserRoleService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;

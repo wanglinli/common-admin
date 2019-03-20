@@ -1,6 +1,6 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.RcOperationLog;
+import com.common.system.entity.system.RcOperationLog;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**

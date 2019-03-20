@@ -1,6 +1,6 @@
 package com.common.system.util;
 
-import com.common.system.entity.RcMenu;
+import com.common.system.entity.system.RcMenu;
 
 import java.util.Comparator;
 

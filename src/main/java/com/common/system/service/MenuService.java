@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.RcMenu;
+import com.common.system.entity.system.RcMenu;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;

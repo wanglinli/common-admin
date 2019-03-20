@@ -1,7 +1,7 @@
 package com.common.system;
 
-import com.common.system.entity.TreeGridNode;
-import com.common.system.entity.TreeGridWrapper;
+import com.common.system.entity.system.TreeGridNode;
+import com.common.system.entity.system.TreeGridWrapper;
 import com.common.system.service.TreeGridService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

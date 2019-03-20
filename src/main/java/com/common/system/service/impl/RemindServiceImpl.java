@@ -1,6 +1,6 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.Remind;
+import com.common.system.entity.finance.Remind;
 import com.common.system.mapper.RemindMapper;
 import com.common.system.service.RemindService;
 import com.common.system.util.Result;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.common.system.mapper.RcRoleMapper">
-  <resultMap id="BaseResultMap" type="com.common.system.entity.RcRole">
+  <resultMap id="BaseResultMap" type="com.common.system.entity.system.RcRole">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="value" jdbcType="VARCHAR" property="value" />
@@ -42,7 +42,7 @@
   <sql id="Base_Column_List">
     id, name, value, tips, create_time, update_time, status
   </sql>
-  <select id="selectByExample" parameterType="com.common.system.entity.RcRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.common.system.entity.system.RcRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -66,7 +66,7 @@
     delete from common_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.common.system.entity.RcRole">
+  <insert id="insert" parameterType="com.common.system.entity.system.RcRole">
     insert into common_role (id, name, value,
       tips, create_time, update_time,
       status)
@@ -74,7 +74,7 @@
       #{tips,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.common.system.entity.RcRole">
+  <insert id="insertSelective" parameterType="com.common.system.entity.system.RcRole">
     insert into common_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -123,7 +123,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.RcRole">
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.system.entity.system.RcRole">
     update common_role
     <set>
       <if test="name != null">
@@ -147,7 +147,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.common.system.entity.RcRole">
+  <update id="updateByPrimaryKey" parameterType="com.common.system.entity.system.RcRole">
     update common_role
     set name = #{name,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR},

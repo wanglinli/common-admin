@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.ZTreeNode;
+import com.common.system.entity.system.ZTreeNode;
 
 import java.util.List;
 

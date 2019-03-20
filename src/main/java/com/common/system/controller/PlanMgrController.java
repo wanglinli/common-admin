@@ -1,7 +1,7 @@
 package com.common.system.controller;
 
 
-import com.common.system.entity.Remind;
+import com.common.system.entity.finance.Remind;
 import com.common.system.service.RemindService;
 import com.common.system.util.PageBean;
 import com.common.system.util.Result;
@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Controller
 @RequestMapping(value = "plan")

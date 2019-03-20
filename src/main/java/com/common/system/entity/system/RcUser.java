@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.system;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.baomidou.mybatisplus.activerecord.Model;

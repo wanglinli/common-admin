@@ -1,6 +1,6 @@
 package com.common.system.shiro;
 
-import com.common.system.entity.*;
+import com.common.system.entity.system.*;
 import com.common.system.service.MenuService;
 import com.common.system.service.PrivilegeService;
 import com.common.system.service.RcUserRoleService;

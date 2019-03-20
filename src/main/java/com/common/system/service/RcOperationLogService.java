@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.RcOperationLog;
+import com.common.system.entity.system.RcOperationLog;
 import com.baomidou.mybatisplus.service.IService;
 
 /**

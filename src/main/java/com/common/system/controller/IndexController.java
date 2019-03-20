@@ -1,9 +1,8 @@
 package com.common.system.controller;
 
-import com.common.system.entity.RcMenu;
-import com.common.system.entity.RcPrivilege;
+import com.common.system.entity.system.RcMenu;
+import com.common.system.entity.system.RcPrivilege;
 import com.common.system.service.MenuService;
-import com.common.system.service.PrivilegeService;
 import com.common.system.shiro.ShiroKit;
 import com.common.system.shiro.ShiroUser;
 import com.common.system.util.MenuComparator;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**

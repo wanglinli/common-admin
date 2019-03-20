@@ -1,10 +1,7 @@
 package com.common.system.interceptor;
 
 
-import com.common.system.entity.RcOperationLog;
 import com.common.system.mapper.RcOperationLogMapper;
-import com.google.gson.Gson;
-import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -15,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
-import java.sql.Statement;
 import java.util.Properties;
 
 /**

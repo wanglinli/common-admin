@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.RcPrivilege;
+import com.common.system.entity.system.RcPrivilege;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.system;
 
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;

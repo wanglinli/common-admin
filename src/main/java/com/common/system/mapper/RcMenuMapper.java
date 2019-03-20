@@ -1,7 +1,7 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.RcMenu;
-import com.common.system.entity.RcMenuExample;
+import com.common.system.entity.system.RcMenu;
+import com.common.system.entity.system.RcMenuExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;

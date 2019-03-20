@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.RcUserRole;
+import com.common.system.entity.system.RcUserRole;
 import com.baomidou.mybatisplus.service.IService;
 
 import java.util.List;

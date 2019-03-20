@@ -1,4 +1,4 @@
-package com.common.system.entity;
+package com.common.system.entity.finance;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

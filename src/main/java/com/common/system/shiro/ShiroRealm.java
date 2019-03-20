@@ -1,8 +1,6 @@
 package com.common.system.shiro;
 
-import com.common.system.entity.*;
-import com.common.system.service.MenuService;
-import com.common.system.service.PrivilegeService;
+import com.common.system.entity.system.RcUser;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -13,10 +11,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
 
 /**
  * Created by Mr.Yangxiufeng on 2017/6/20.

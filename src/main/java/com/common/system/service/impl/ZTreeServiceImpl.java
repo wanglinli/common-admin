@@ -1,7 +1,7 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.RcMenu;
-import com.common.system.entity.ZTreeNode;
+import com.common.system.entity.system.RcMenu;
+import com.common.system.entity.system.ZTreeNode;
 import com.common.system.service.MenuService;
 import com.common.system.service.ZTreeService;
 import com.fasterxml.jackson.core.JsonProcessingException;

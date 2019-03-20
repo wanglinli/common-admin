@@ -1,6 +1,6 @@
 package com.common.system.controller;
 
-import com.common.system.entity.RcPrivilege;
+import com.common.system.entity.system.RcPrivilege;
 import com.common.system.service.PrivilegeService;
 import com.common.system.util.MsgCode;
 import com.common.system.util.Result;

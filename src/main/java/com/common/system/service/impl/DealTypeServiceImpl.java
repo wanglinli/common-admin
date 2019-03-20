@@ -1,7 +1,6 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.DealType;
-import com.common.system.entity.RcRoleWrapper;
+import com.common.system.entity.finance.DealType;
 import com.common.system.mapper.DealTypeMapper;
 import com.common.system.service.DealTypeService;
 import com.common.system.util.Result;

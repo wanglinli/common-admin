@@ -1,6 +1,6 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.Bill;
+import com.common.system.entity.finance.Bill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

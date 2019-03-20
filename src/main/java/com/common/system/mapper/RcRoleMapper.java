@@ -1,7 +1,7 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.RcRole;
-import com.common.system.entity.RcRoleExample;
+import com.common.system.entity.system.RcRole;
+import com.common.system.entity.system.RcRoleExample;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

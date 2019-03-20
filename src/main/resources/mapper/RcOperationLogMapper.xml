@@ -3,7 +3,7 @@
 <mapper namespace="com.common.system.mapper.RcOperationLogMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.common.system.entity.RcOperationLog">
+	<resultMap id="BaseResultMap" type="com.common.system.entity.system.RcOperationLog">
 		<id column="id" property="id" />
 		<result column="user_id" property="userId" />
 		<result column="username" property="username" />

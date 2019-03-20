@@ -1,6 +1,6 @@
 package com.common.system.service;
 
-import com.common.system.entity.Remind;
+import com.common.system.entity.finance.Remind;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
 

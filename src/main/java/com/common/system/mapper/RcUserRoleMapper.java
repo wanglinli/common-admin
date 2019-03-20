@@ -1,6 +1,6 @@
 package com.common.system.mapper;
 
-import com.common.system.entity.RcUserRole;
+import com.common.system.entity.system.RcUserRole;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 /**

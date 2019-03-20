@@ -1,9 +1,9 @@
 package com.common.system.controller;
 
-import com.common.system.entity.RcMenu;
-import com.common.system.entity.TreeGridNode;
-import com.common.system.entity.TreeGridWrapper;
-import com.common.system.entity.ZTreeNode;
+import com.common.system.entity.system.RcMenu;
+import com.common.system.entity.system.TreeGridNode;
+import com.common.system.entity.system.TreeGridWrapper;
+import com.common.system.entity.system.ZTreeNode;
 import com.common.system.service.MenuService;
 import com.common.system.service.SequenceService;
 import com.common.system.service.TreeGridService;

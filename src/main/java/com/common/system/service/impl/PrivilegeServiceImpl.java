@@ -1,7 +1,7 @@
 package com.common.system.service.impl;
 
-import com.common.system.entity.RcPrivilege;
-import com.common.system.entity.RcPrivilegeExample;
+import com.common.system.entity.system.RcPrivilege;
+import com.common.system.entity.system.RcPrivilegeExample;
 import com.common.system.mapper.RcPrivilegeMapper;
 import com.common.system.service.PrivilegeService;
 import org.springframework.beans.factory.annotation.Autowired;
