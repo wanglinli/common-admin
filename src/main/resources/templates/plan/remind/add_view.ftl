@@ -3,14 +3,28 @@
 		<form id="remindAddForm">
 				<div class="modal-body">
 					<div class="form-group">
-						<label id="timeLabel">时间</label>
-						<div class="input-group date ">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"></i>
+						<div class="col-sm-6">
+							<label id="dateLabel">日期</label>
+							<div class="input-group date ">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right" id="securityDate" placeholder="选择日期...">
 							</div>
-							<input type="text" class="form-control pull-right" name="time" id="securityTime" placeholder="选择时间...">
+						</div>
+						<label id="timeLabel">时间</label>
+						<div class="input-group time ">
+							<div class="input-group-addon">
+								<i class="fa fa-clock-o"></i>
+							</div>
+							<input type="text" class="form-control pull-right" id="securityTime" placeholder="选择时间...">
 						</div>
 					</div>
+					<div class="form-group" style="display: none">
+						<label id="contentLabel">date</label>
+						<input type="text" class="form-control" name="time" id="time" value="">
+					</div>
+
 					<div class="form-group">
 						<label id="contentLabel">内容</label>
 						<input type="text" class="form-control" name="content" id="remindContent" placeholder="输入内容...">
@@ -38,27 +52,39 @@
 		</form>
 	</div>
 </div>
+<script>
+
+</script>
 <script type="text/javascript">
 	//初始化时间选择器
-	$('#securityTime').datepicker({
+	$('#securityDate').datepicker({
 		language: 'zh-CN',
-		format: 'yyyymmdd',
+		format: 'yyyy-mm-dd',
 		autoclose: true,
 		todayHighlight: true
 	});
+	var myDate = new Date();
+	var mytime=myDate.toLocaleTimeString('chinese', { hour12: false });
+	$('#securityTime').val(mytime);
 
 	function remindeAdd(){
 	$("span").remove(".errorClass");
 	$("br").remove(".errorClass");
 	var status = 1;
+	if($("#securityDate").val()==""){
+		$("#dateLabel").prepend('<span class="errorClass" style="color:red">*日期不能为空</span><br class="errorClass"/>');
+		status = 0;
+	}
 	if($("#securityTime").val()==""){
 		$("#timeLabel").prepend('<span class="errorClass" style="color:red">*时间不能为空</span><br class="errorClass"/>');
 		status = 0;
+
 	}
 	if($("#remindContent").val()==""){
 		$("#contentLabel").prepend('<span class="errorClass" style="color:red">*内容不能为空</span><br class="errorClass"/>');
 		status = 0;
 	}
+	$('#time').val($('#securityDate').val() + " " +$('#securityTime').val());
 	if(status == 0){
 		return false;
 	}else{

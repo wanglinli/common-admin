@@ -11,8 +11,12 @@
 					<input type="text" class="form-control" name="time" id="time" value="${remind.time?string('yyyy-MM-dd HH:mm:ss')}" placeholder="时间...">
 				</div>
 				<div class="form-group">
-					<label id="remindContentLabel">提醒内容</label>
-					<input type="text" class="form-control" name="remindContent" id="remindContent" value="${remind.content}" placeholder="提醒内容...">
+					<label id="contentLabel">提醒内容</label>
+					<input type="text" class="form-control" name="content" id="remindContent" value="${remind.content}" placeholder="提醒内容...">
+				</div>
+				<div class="form-group" style="display:none;">
+					<label id="contentLabel">user</label>
+					<input type="text" class="form-control" name="user" id="user" value="${remind.user}" placeholder="用户...">
 				</div>
 				<div class="form-group">
 					<label id="noteValueLabel">当前状态</label>
@@ -41,7 +45,7 @@
 			status = 0;
 		}
 		if($("#remindContent").val()===''){
-			$("#remindContentLabel").prepend('<span class="errorClass" style="color:red">*内容不能为空</span><br class="errorClass"/>');
+			$("#contentLabel").prepend('<span class="errorClass" style="color:red">*内容不能为空</span><br class="errorClass"/>');
 			status = 0;
 		}
 		if(status == 0){

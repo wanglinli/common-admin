@@ -68,7 +68,7 @@ public class PlanMgrController extends BaseController {
     @RequestMapping(value = "remind/save")
     public @ResponseBody
     Result save(String time,String content, int status,String user){
-        Remind remind = getRemind(time,content, status, user);
+        Remind remind = getRemind(null,time,content, status, user);
         return remindService.save(remind);
     }
 
@@ -80,18 +80,19 @@ public class PlanMgrController extends BaseController {
 
     @RequestMapping(value = "remind/update")
     public @ResponseBody
-    Result update(String time,String content, int status,String user){
-        Remind remind = getRemind(time,content, status, user);
+    Result update(String id,String time,String content, int status,String user){
+        Remind remind = getRemind(id,time,content, status, user);
         return remindService.update(remind);
     }
 
 
 
-    private Remind getRemind(String time,String content, int status,String user) {
+    private Remind getRemind(String id,String time,String content, int status,String user) {
         Remind remind = new Remind();
         remind.setContent(content);
+        remind.setId(id);
         remind.setStatus(status);
-        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             remind.setTime(sDateFormat.parse(time));
         } catch (ParseException e) {
