@@ -14,7 +14,7 @@
                     <thead>
                     <tr>
                         <th>序号</th>
-                        <th>收入时间</th>
+                        <th>交易时间</th>
                         <th>创建时间</th>
                         <th>金额</th>
                         <th>交易方式</th>

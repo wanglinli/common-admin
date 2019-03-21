@@ -1,13 +1,10 @@
 <div class="row">
 	<div class="box-body  no-padding">
 		<table class="table table-striped">
-            <tr>
-                <td>id：</td>
-                <td style="width: 90%">${bean.id}</td>
-            </tr>
+
 			<tr>
 				<td>收款时间：</td>
-				<td>${bean.billTime?datetime}</td>
+				<td style="width: 90%">${bean.billTime?datetime}</td>
 			</tr>
 			<tr>
 				<td>收入金额：</td>
