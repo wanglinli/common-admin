@@ -89,7 +89,7 @@
                     "data": null,
                     "render": function (data) {
                         var btn = "";
-                        btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
+                        btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/bills/view/' + data.id + '">查看</a> &nbsp;';
                         return btn;
                     }
                 }]

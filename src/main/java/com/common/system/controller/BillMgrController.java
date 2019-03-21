@@ -139,8 +139,10 @@ public class BillMgrController extends BaseController{
         ShiroUser user = (ShiroUser) session.getAttribute("user");
         if("in".equalsIgnoreCase(billFlag)){
             modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),0));
+            modelAndView.addObject("inOrOut",1);
         } else {
             modelAndView.addObject("type", dealTypeService.queryAllByUser(user.getUsername(),1));
+            modelAndView.addObject("inOrOut",0);
         }
         modelAndView.setViewName("/bills/add");
         return modelAndView;
@@ -148,13 +150,27 @@ public class BillMgrController extends BaseController{
 
 
     @RequestMapping(value = "save")
-    public @ResponseBody
-    Result save(String billTime, String billMoney, String billType, String billNote, String billFlag, HttpSession session){
+    @ResponseBody
+    public  Result save(String billTime, String billMoney, String billType, String billNote, String billFlag, HttpSession session){
         ShiroUser user = (ShiroUser) session.getAttribute("user");
         Bill bill  = getBill(billTime,billMoney,billType,billNote,user.getUsername(),billFlag);
         return billService.save(bill);
     }
 
+
+    @RequestMapping(value = "view/{id}", method = RequestMethod.GET)
+    public ModelAndView view(@PathVariable String id, ModelAndView modelAndView){
+        Result<Bill> result =   billService.selectById(Integer.parseInt(id));
+        modelAndView.addObject("bean",result.getData());
+        modelAndView.setViewName("/bills/view");
+        return modelAndView;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "delete/{id}")
+    public Result<Integer> delteByID(@PathVariable String id){
+        return billService.deleteById(Integer.parseInt(id));
+    }
 
     public  static Bill  getBill(String billTime,String billMoney, String billType, String billNote, String userName,String billFlag){
         Bill bill = new Bill();
@@ -174,4 +190,6 @@ public class BillMgrController extends BaseController{
         bill.setCreateTime(new Date());
         return bill;
     }
+
+
 }

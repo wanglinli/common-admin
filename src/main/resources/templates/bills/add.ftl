@@ -3,27 +3,26 @@
 		<form id="securityAddForm">
 			<div class="modal-body">
                 <div class="form-group">
-                    <label id="billTimeLabel">收款时间</label>
-                    <input type="text" class="form-control" name="billTime" id="billTime"  placeholder="输入收款时间,格式为: yyyy-MM-dd HH:mm:ss" >
+                    <label id="billTimeLabel">交易时间</label>
+                    <input type="text" class="form-control" name="billTime" id="billTime"  placeholder="输入交易时间,格式为: yyyy-MM-dd HH:mm:ss" >
                 </div>
 
                 <div class="form-group">
-                    <label id="billMoneyLabel">收入金额</label>
-                    <input type="text" class="form-control" name="billMoney" id="billMoney" placeholder="输入金额...">
+                    <label id="billMoneyLabel">交易金额</label>
+                    <input type="text" class="form-control" name="billMoney" id="billMoney" placeholder="输入交易金额...">
                 </div>
                 <div class="form-group">
-                    <label id="billTypeLabel">收款方式</label>
-                    <input type="text" class="form-control" name="billType" id="billType" placeholder="输入收款方式...">
+                    <label id="billTypeLabel">交易方式</label>
+                    <input type="text" class="form-control" name="billType" id="billType" placeholder="输入交易方式...">
                 </div>
                 <div class="form-group">
-                    <input hidden="hidden" value="1" id="billFlag" name="billFlag">
+                    <input hidden="hidden" value="${inOrOut}" id="billFlag" name="billFlag">
                 </div>
                 <div class="form-group">
                     <label for="billNote" id="billNote">交易说明</label>
                     <select type="text" class="form-control" name="billNote" id="billNote">
                         <#list type as obj>
                             <option>
-							<#--只展示收入类型-->
 								${obj.type}
                             </option>
 						</#list>

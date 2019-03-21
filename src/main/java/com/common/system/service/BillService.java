@@ -18,7 +18,7 @@ public interface BillService {
 
     PageInfo<Bill> queryAll();
 
-    int deleteById(Integer id);
+    Result<Integer> deleteById(Integer id);
 
     Result<Bill> selectById(Integer id);
 

@@ -81,7 +81,7 @@
                     "data": null,
                     "render": function (data) {
                         var btn = "";
-                        btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/user/view/' + data.id + '">查看</a> &nbsp;';
+                        btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/bills/view/' + data.id + '">查看</a> &nbsp;';
                         btn += '<@shiro.hasPermission name="bills/edit">'
                             + '<a class="btn btn-xs btn-info" onclick="securityToListAjax();" data-title="修改" target="modal" modal="lg" href="/bills/edit/'+ data.id + '-in' + '">修改</a> &nbsp;'
                             +'</@shiro.hasPermission>'

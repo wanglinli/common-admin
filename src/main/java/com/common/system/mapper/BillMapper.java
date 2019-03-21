@@ -1,10 +1,7 @@
 package com.common.system.mapper;
 
 import com.common.system.entity.finance.Bill;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,4 +22,8 @@ public interface BillMapper {
 
     @Insert("insert into common_bill (billTime,billMoney,billType,billUser,billNote,billFlag,createtime) values (#{billTime},#{billMoney},#{billType},#{billUser},#{billNote},#{billFlag},#{createTime})")
     Integer save(Bill bill);
+
+    @Delete("delete from common_bill  where id=#{id}")
+    Integer delete(int id);
+
 }

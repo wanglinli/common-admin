@@ -5,9 +5,9 @@
                 <h3 class="box-title">支出列表</h3>
 
                 <div class="box-tools pull-left">
-                    <@shiro.hasPermission name="user/add">
+                    <@shiro.hasPermission name="bills/add">
                         <a onclick="securityToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg"
-                           href="/user/add">添加</a>
+                           href="/bills/add/out">添加</a>
                     </@shiro.hasPermission>
                     <@shiro.hasPermission name="bills/exportExcel">
                         <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>
@@ -19,9 +19,9 @@
                     <thead>
                     <tr>
                         <th>序号</th>
-                        <th>收入时间</th>
+                        <th>交易时间</th>
                         <th>创建时间</th>
-                        <th>金额</th>
+                        <th>交易金额</th>
                         <th>交易方式</th>
                         <th>交易说明</th>
                         <th>操作</th>

@@ -36,8 +36,11 @@ public class BillServiceImpl implements BillService {
 
 
     @Override
-    public int deleteById(Integer id) {
-        return 0;
+    public Result<Integer> deleteById(Integer id) {
+        Result<Integer> result = new Result<Integer>();
+        int res =  mapper.delete(id);
+        getIntegerResult(result,res);
+        return result;
     }
 
     @Override
