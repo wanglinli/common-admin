@@ -72,14 +72,12 @@ $(function() {
 				"data" : null,
 				"render" : function(data) {
 					var btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="plan/remind/view/'+ data.id+ '">查看</a> &nbsp;';
-						if(data.roleValue != 'super'){
-							btn = btn+'<@shiro.hasPermission name="plan/remind/edit">'
+					btn = btn+'<@shiro.hasPermission name="plan/remind/edit">'
 							+'<a class="btn btn-xs btn-info" onclick="remindToListAjax();" target="modal" modal="lg" href="plan/remind/edit/'+ data.id+'">修改</a> &nbsp;'
 							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="plan/remind/delete">'
-							+'<a class="btn btn-xs btn-default" callback="roleReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/remind/delete/'+ data.id + '">删除</a>  &nbsp;'
+							+'<a class="btn btn-xs btn-default" callback="remindReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/remind/delete/'+ data.id + '">删除</a>  &nbsp;'
 							+'</@shiro.hasPermission>'
-						}
 				return btn;
 			}
 		} ]
@@ -88,7 +86,7 @@ $(function() {
     } );
 });
 
-function roleReload(){
+function remindReload(){
 	reloadTable(remind_tab,"#roleTime","#rolePremise");
 }
 

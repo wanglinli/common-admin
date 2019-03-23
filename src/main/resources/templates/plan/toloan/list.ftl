@@ -5,7 +5,7 @@
 				<h3 class="box-title">借贷管理</h3>
 				<div class="box-tools pull-right">
 					<@shiro.hasPermission name="plan/toloan/add">
-						<a onclick="roleToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg" href="plan/toloan/add">添加</a>
+						<a onclick="toLoanToListAjax();" class="btn btn-sm btn-primary" target="modal" modal="lg" href="plan/toloan/add">添加</a>
 					</@shiro.hasPermission>
 				</div>
 			</div>
@@ -33,12 +33,12 @@
 </div>
 
 <script type="text/javascript">
-var role_tab;
+var toloan_tab;
 $(function() {
 
 	//初始化表格
 	var No=0;
-	role_tab = $('#toloan_tab').DataTable({
+	toloan_tab = $('#toloan_tab').DataTable({
 		"dom":'itflp',
 		"processing":true,
 		"searching":false,
@@ -75,13 +75,13 @@ $(function() {
 				"render" : function(data) {
 					var btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="plan/toloan/view/'+ data.id+ '">查看</a> &nbsp;';
 					btn = btn+'<@shiro.hasPermission name="plan/toloan/edit">'
-							+'<a class="btn btn-xs btn-info" onclick="roleToListAjax();" target="modal" modal="lg" href="plan/toloan/edit/'+ data.id+'">修改</a> &nbsp;'
+							+'<a class="btn btn-xs btn-info" onclick="toLoanToListAjax();" target="modal" modal="lg" href="plan/toloan/edit/'+ data.id+'">修改</a> &nbsp;'
 							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="plan/toloan/repayment">'
-							+'<a class="btn btn-xs btn-default" callback="roleReload();" target="modal" modal="lg" href="plan/toloan/repayment/'+ data.id+'">还贷款</a>  &nbsp;'
+							+'<a class="btn btn-xs btn-default" callback="toLoanReload();" target="modal" modal="lg" href="plan/toloan/repayment/'+ data.id+'">还贷款</a>  &nbsp;'
 							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="plan/toloan/delete">'
-							+'<a class="btn btn-xs btn-danger" callback="roleReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/toloan/delete/'+ data.id + '">删除</a>  &nbsp;'
+							+'<a class="btn btn-xs btn-danger" callback="toLoanReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/toloan/delete/'+ data.id + '">删除</a>  &nbsp;'
 							+'</@shiro.hasPermission>'
 				return btn;
 			}
@@ -92,11 +92,11 @@ $(function() {
     } );
 });
 
-function roleReload(){
-	reloadTable(role_tab,"#roleTime","#rolePremise");
+function toLoanReload(){
+	reloadTable(toloan_tab,"#roleTime","#rolePremise");
 }
 
-function roleToListAjax(){
-	list_ajax = role_tab;
+function toLoanToListAjax(){
+	list_ajax = toloan_tab;
 }
 </script>

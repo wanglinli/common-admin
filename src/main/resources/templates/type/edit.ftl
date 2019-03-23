@@ -62,7 +62,7 @@
 				if (json.status){
 					$("#lgModal").modal('hide');
 					alertMsg("更新成功","success");
-					reloadTable(list_ajax,"#roleTime","#rolePremise");
+					typeReload(list_ajax,"#roleTime","#rolePremise");
 				}else{
 					alertMsg("更新失败:"+json.msg,"success");
 				}

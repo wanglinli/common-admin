@@ -1,9 +1,11 @@
 package com.common.system.controller;
 
 
+import com.common.system.entity.finance.BorrowLend;
 import com.common.system.entity.finance.Remind;
 import com.common.system.entity.finance.ToLoan;
 import com.common.system.entity.finance.ToLoanHistory;
+import com.common.system.service.BorrowLendService;
 import com.common.system.service.RemindService;
 import com.common.system.service.ToLoanHistoryService;
 import com.common.system.service.ToLoanService;
@@ -29,19 +31,22 @@ public class PlanMgrController extends BaseController {
 
     private final RemindService remindService;
 
+    private final BorrowLendService borrowLendService;
+
     private final ToLoanService toLoanService;
 
     private final ToLoanHistoryService toLoanHistoryService;
 
     @Autowired
-    public PlanMgrController(RemindService remindService, ToLoanService toLoanService, ToLoanHistoryService toLoanHistoryService) {
+    public PlanMgrController(RemindService remindService, ToLoanService toLoanService, ToLoanHistoryService toLoanHistoryService, BorrowLendService borrowLendService) {
         this.remindService = remindService;
         this.toLoanService = toLoanService;
         this.toLoanHistoryService = toLoanHistoryService;
+        this.borrowLendService = borrowLendService;
     }
 
     @RequestMapping(value = "remind", method = RequestMethod.GET)
-    public ModelAndView day(ModelAndView modelAndView) {
+    public ModelAndView remind(ModelAndView modelAndView) {
         modelAndView.setViewName("/plan/remind/list");
         return modelAndView;
     }
@@ -255,11 +260,101 @@ public class PlanMgrController extends BaseController {
 
 
     @RequestMapping(value = "borrow", method = RequestMethod.GET)
-    public ModelAndView month(ModelAndView modelAndView) {
+    public ModelAndView borrow(ModelAndView modelAndView) {
         modelAndView.setViewName("/plan/borrow/list");
         return modelAndView;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "borrow/page")
+    public PageBean<BorrowLend> queryForPageBorrow(@RequestParam(value = "start", defaultValue = "1") int start,
+                                                   @RequestParam(value = "length", defaultValue = "10") int pageSize, HttpSession session) {
+        ShiroUser user = getShiroUser(session);
+        PageInfo<BorrowLend> pageInfo = borrowLendService.listForPage((start / pageSize) + 1, pageSize,user.getUsername());
+        return new PageBean<>(pageInfo);
+    }
 
+    @RequestMapping(value = "borrow/edit/{id}",method = RequestMethod.GET)
+    public ModelAndView editBorrow(ModelAndView modelAndView,@PathVariable Integer id){
+        Result<BorrowLend> result = borrowLendService.selectById(id);
+        modelAndView.addObject("borrow",result.getData());
+        modelAndView.setViewName("/plan/borrow/edit");
+        return modelAndView;
+    }
 
+    @RequestMapping(value = "borrow/view/{id}", method = RequestMethod.GET)
+    public ModelAndView viewBorrow(@PathVariable Integer id, ModelAndView modelAndView) {
+        Result<BorrowLend> result = borrowLendService.selectById(id);
+        modelAndView.addObject("bean", result.getData());
+        modelAndView.setViewName("/plan/borrow/view");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "borrow/add", method = RequestMethod.GET)
+    public ModelAndView addborrow(ModelAndView modelAndView) {
+        modelAndView.setViewName("/plan/borrow/add_view");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "borrow/save")
+    public @ResponseBody
+    Result saveBorrow(String borrowLendTime,String note, String status,String money,String borrowUser,String lendUser,HttpSession session){
+        BorrowLend obj = new BorrowLend();
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            obj.setBorrowLendTime(sDateFormat.parse(borrowLendTime + " 00:00:00"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        obj.setNote(note);
+        obj.setBorrowUser(borrowUser);
+        obj.setMoney(money);
+        obj.setLendUser(lendUser);
+        obj.setCreateTime(new Date());
+        obj.setStatus(Integer.valueOf(status));
+        Result result = new Result();
+        ShiroUser shiroUser = getShiroUser(session);
+        if (!obj.getBorrowUser().equals(shiroUser.getUsername()) && !obj.getLendUser().equals(shiroUser.getUsername())){
+            result.setStatus(false);
+            result.setMsg("非法操作!");
+            return result;
+        }else {
+            result = borrowLendService.save(obj);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "borrow/update")
+    public @ResponseBody
+    Result updateBorrow(Integer id,String borrowLendTime,String note, String status,String money,String borrowUser,String lendUser,HttpSession session){
+
+        BorrowLend obj = borrowLendService.selectById(id).getData();
+        obj.setNote(note);
+        obj.setLendUser(lendUser);
+        obj.setBorrowUser(borrowUser);
+        obj.setMoney(money);
+        obj.setStatus(Integer.valueOf(status));
+        Result result = new Result();
+        ShiroUser shiroUser = getShiroUser(session);
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            obj.setBorrowLendTime(sDateFormat.parse(borrowLendTime + " 00:00:00"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (!obj.getBorrowUser().equals(shiroUser.getUsername()) && !obj.getLendUser().equals(shiroUser.getUsername())){
+            result.setStatus(false);
+            result.setMsg("非法操作!");
+            return result;
+        }else {
+            result = borrowLendService.update(obj);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "borrow/delete/{id}",method = RequestMethod.GET)
+    public @ResponseBody
+    Result deleteBorrow(@PathVariable Integer id){
+        return borrowLendService.deleteById(id);
+    }
 }
