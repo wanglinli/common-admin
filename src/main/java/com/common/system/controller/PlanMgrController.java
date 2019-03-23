@@ -3,7 +3,9 @@ package com.common.system.controller;
 
 import com.common.system.entity.finance.Remind;
 import com.common.system.entity.finance.ToLoan;
+import com.common.system.entity.finance.ToLoanHistory;
 import com.common.system.service.RemindService;
+import com.common.system.service.ToLoanHistoryService;
 import com.common.system.service.ToLoanService;
 import com.common.system.shiro.ShiroUser;
 import com.common.system.util.PageBean;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "plan")
@@ -28,10 +31,13 @@ public class PlanMgrController extends BaseController {
 
     private final ToLoanService toLoanService;
 
+    private final ToLoanHistoryService toLoanHistoryService;
+
     @Autowired
-    public PlanMgrController(RemindService remindService, ToLoanService toLoanService) {
+    public PlanMgrController(RemindService remindService, ToLoanService toLoanService, ToLoanHistoryService toLoanHistoryService) {
         this.remindService = remindService;
         this.toLoanService = toLoanService;
+        this.toLoanHistoryService = toLoanHistoryService;
     }
 
     @RequestMapping(value = "remind", method = RequestMethod.GET)
@@ -54,6 +60,8 @@ public class PlanMgrController extends BaseController {
         modelAndView.setViewName("/plan/remind/add_view");
         return modelAndView;
     }
+
+
 
     @RequestMapping(value = "remind/edit/{id}",method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView modelAndView,@PathVariable Integer id){
@@ -133,6 +141,43 @@ public class PlanMgrController extends BaseController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "toloan/repayment/{id}", method = RequestMethod.GET)
+    public ModelAndView returnView(ModelAndView modelAndView,@PathVariable Integer id) {
+        Result<ToLoan> result = toLoanService.selectById(id);
+        modelAndView.addObject("toLoan",result.getData());
+        modelAndView.setViewName("/plan/toloan/repayment");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "toloan/repayment/save")
+    public @ResponseBody
+    Result saveToLoanHistory(String returnTime,String returnMoney, String toLoan){
+        ToLoanHistory obj = new ToLoanHistory();
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            obj.setReturnTime(sDateFormat.parse(returnTime + " 00:00:00"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        obj.setToLoan(toLoan);
+        obj.setReturnMoney(returnMoney);
+        obj.setCreateTime(new Date());
+        obj.setCreateTime(new Date());
+
+        ToLoan obj_toloan = toLoanService.selectById(Integer.parseInt(toLoan)).getData();
+        String alreadyRepaid = obj_toloan.getAlreadyRepaid();
+        double alreadRe = new Double(alreadyRepaid) + new Double(returnMoney);
+        if ((new Double(obj_toloan.getMoney())+ new Double(obj_toloan.getInterest()))< new Double(obj.getReturnMoney())){
+            obj_toloan.setSurplus("0");
+        }else {
+            obj_toloan.setSurplus(String.valueOf(new Double(obj_toloan.getMoney()) + new Double(obj_toloan.getInterest()) - (alreadRe)));
+        }
+        obj_toloan.setAlreadyRepaid(String.valueOf(alreadRe));
+        toLoanService.update(obj_toloan);
+
+        return toLoanHistoryService.save(obj);
+    }
+
     @RequestMapping(value = "toloan/edit/{id}",method = RequestMethod.GET)
     public ModelAndView editToLoan(ModelAndView modelAndView,@PathVariable Integer id){
         Result<ToLoan> result = toLoanService.selectById(id);
@@ -144,7 +189,9 @@ public class PlanMgrController extends BaseController {
     @RequestMapping(value = "toloan/view/{id}", method = RequestMethod.GET)
     public ModelAndView viewToLoan(@PathVariable Integer id, ModelAndView modelAndView) {
         Result<ToLoan> result = toLoanService.selectById(id);
+        List<ToLoanHistory> historyResult = toLoanHistoryService.selectByToLoan(String.valueOf(id));
         modelAndView.addObject("bean", result.getData());
+        modelAndView.addObject("historyResult", historyResult);
         modelAndView.setViewName("/plan/toloan/view");
         return modelAndView;
     }
@@ -198,6 +245,7 @@ public class PlanMgrController extends BaseController {
     @RequestMapping(value = "toloan/delete/{id}",method = RequestMethod.GET)
     public @ResponseBody
     Result deleteToLoan(@PathVariable Integer id){
+        toLoanHistoryService.deleteByToLoan(String.valueOf(id));
         return toLoanService.deleteById(id);
     }
 

@@ -77,8 +77,11 @@ $(function() {
 					btn = btn+'<@shiro.hasPermission name="plan/toloan/edit">'
 							+'<a class="btn btn-xs btn-info" onclick="roleToListAjax();" target="modal" modal="lg" href="plan/toloan/edit/'+ data.id+'">修改</a> &nbsp;'
 							+'</@shiro.hasPermission>'
+							+'<@shiro.hasPermission name="plan/toloan/repayment">'
+							+'<a class="btn btn-xs btn-default" callback="roleReload();" target="modal" modal="lg" href="plan/toloan/repayment/'+ data.id+'">还贷款</a>  &nbsp;'
+							+'</@shiro.hasPermission>'
 							+'<@shiro.hasPermission name="plan/toloan/delete">'
-							+'<a class="btn btn-xs btn-default" callback="roleReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/toloan/delete/'+ data.id + '">删除</a>  &nbsp;'
+							+'<a class="btn btn-xs btn-danger" callback="roleReload();" data-body="确认要删除吗？" target="ajaxTodo" href="plan/toloan/delete/'+ data.id + '">删除</a>  &nbsp;'
 							+'</@shiro.hasPermission>'
 				return btn;
 			}

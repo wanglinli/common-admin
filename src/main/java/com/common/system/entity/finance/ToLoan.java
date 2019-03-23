@@ -15,7 +15,7 @@ public class ToLoan {
     private String id;
 
     /**
-     * 接借贷项目
+     * 借贷项目
      */
     private String toLoan;
 

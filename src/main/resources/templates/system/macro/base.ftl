@@ -237,6 +237,14 @@
     //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
     window.reloadTable = function (oTable) {
         oTable.ajax.reload();
+    };
+    function checkMoney(v) {
+        var a=/^[0-9]*(\.[0-9]{1,2})?$/;
+        if(a.test(v)) {
+            return true;
+        }else {
+            return false;
+        }
     }
 </script>
 </#macro>
