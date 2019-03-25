@@ -4,8 +4,17 @@
     <meta charset="utf-8">
     <!-- 引入 ECharts 文件 -->
     <script src="echarts/echarts.common.min.js"></script>
+    <script src="Datepicker/external/jquery/jquery.js"></script>
+    <script src="Datepicker/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.structure.css" />
+    <link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.theme.css" />
+
+
 </head>
 <body>
+<p>开始日期: <input type="text" id="datepickerStart">　　　结束日期: <input type="text" id="datepickerEnd"></p>　　　
+
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div id="main" style="width: 600px;height:400px;"></div>
 </body>
@@ -17,6 +26,9 @@
     myChart.showLoading();
     // 使用刚指定的配置项和数据显示图表。
     $(function () {
+        $( "#datepickerStart" ).datepicker();
+        $( "#datepickerEnd" ).datepicker();
+
         $.ajax({
             url: '/analysis/money',
             type: 'post',
