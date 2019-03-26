@@ -86,6 +86,7 @@ public class DealTypeServiceImpl implements DealTypeService {
         return mapper.getDealTypesByInOrOut(dealType);
     }
 
+
     private Result<Integer> getIntegerResult(Result<Integer> result, int res) {
         if (res > 0){
             result.setMsg("成功!");

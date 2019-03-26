@@ -22,15 +22,12 @@ public interface BillService {
 
     Result<Bill> selectById(Integer id);
 
-    Bill selectByRoleName(String roleName);
-
-    Bill selectByRoleValue(String roleValue);
-
     Result<Integer> save(Bill bill);
 
     Result<Integer> update(Bill type);
 
-    List<RcRoleWrapper> getRoleWrapperList();
+    String getDataByMonthAndYearIn(String param);
 
+    String getDataByMonthAndYearOut(String param);
 
 }

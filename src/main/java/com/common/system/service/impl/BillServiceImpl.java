@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,15 +57,6 @@ public class BillServiceImpl implements BillService {
         return result;
     }
 
-    @Override
-    public Bill selectByRoleName(String roleName) {
-        return null;
-    }
-
-    @Override
-    public Bill selectByRoleValue(String roleValue) {
-        return null;
-    }
 
     @Override
     public Result<Integer> save(Bill bill) {
@@ -79,8 +71,27 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public List<RcRoleWrapper> getRoleWrapperList() {
-        return null;
+    public String getDataByMonthAndYearIn(String param) {
+        List<Bill> list = mapper.getDataByMonthAndYear(param+"%");
+        String res = "0";
+        for (Bill money:list) {
+            if (1 == money.getBillFlag()){
+                res += (new Double(res) + new Double(money.getBillMoney()));
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public String getDataByMonthAndYearOut(String param) {
+        List<Bill> list = mapper.getDataByMonthAndYear(param + "%");
+        String res = "0";
+        for (Bill money:list) {
+            if (0 == money.getBillFlag()){
+                res += (new Double(res) + new Double(money.getBillMoney()));
+            }
+        }
+        return res;
     }
 
 
