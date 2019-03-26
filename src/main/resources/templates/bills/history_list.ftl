@@ -3,6 +3,8 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">历史列表</h3>
+                <p>开始日期: <input type="text" id="datepickerStart2">　　　结束日期: <input type="text" id="datepickerEnd2">    <a class="btn btn-xs btn-primary" target="modal" modal="lg" onclick="queryByDate()">提交</a></p>　　　
+
                 <div class="box-tools pull-left">
                     <@shiro.hasPermission name="bills/exportExcel">
                         <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>
@@ -32,6 +34,12 @@
 <script type="text/javascript">
     var bills_history_tab;
     $(function () {
+        $("input[id^='datepicker']").datepicker({
+            language: 'zh-CN',
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
         //初始化时间选择器
         $('#securityTime').datepicker({
             language: 'zh-CN',
@@ -112,5 +120,74 @@
     }
     function isNull(data) {
         return (data == "" || data == undefined || data == null) ? true : false;
+    }
+
+    function queryByDate() {
+        var beginDate = $('#datepickerStart2').val();
+        var endDate = $('#datepickerEnd2').val();
+        $.ajax({
+            url: '/bills/page',
+            type: 'post',
+                data: {starDate:beginDate,endDate:endDate,billFlag:2},
+            success: function (data) {
+                var No = 0;
+                bills_history_tab = $('#bills_history_tab').DataTable({
+                    "dom": 'itflp',
+                    "processing": true,
+                    "searching": false,
+                    "serverSide": true, //启用服务器端分页
+                    "bInfo": false,
+                    "language": {"url": "adminlte/plugins/datatables/language.json"},
+                    "columns": [
+                        {"data": null},
+                        {"data": "billTime"},
+                        {"data": "createTime"},
+                        {"data": "billMoney"},
+                        {"data": "billType"},
+                        {"data": "billNote"},
+                        {"data": null},
+                        {"data": null}
+                    ],
+                    "columnDefs": [
+                        {
+                            targets: 0,
+                            data: null,
+                            render: function (data) {
+                                No = No + 1;
+                                return No;
+                            }
+                        }, {
+                            targets: -2,
+                            data: null,
+                            render: function (data) {
+                                if (data.billFlag == 0){
+                                    return "支出记录";
+                                }else if (data.billFlag == 1){
+                                    return "收入记录";
+                                }else {
+                                    return "未知";
+                                }
+                            }
+                        }, {
+                            "targets": -1,
+                            "data": null,
+                            "render": function (data) {
+                                var btn = "";
+                                btn = '<a class="btn btn-xs btn-primary" target="modal" modal="lg" href="/bills/view/' + data.id + '">查看</a> &nbsp;';
+                                return btn;
+                            }
+                        }]
+                }).on('preXhr.dt', function (e, settings, data) {
+                    No = 0;
+                });
+
+                $("#securitySeek").on("click", function () {
+                    securityReload();
+                });
+            },
+            error: function () {
+                alert("失败");
+            }
+        });
     }
 </script>

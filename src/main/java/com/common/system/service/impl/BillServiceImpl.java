@@ -10,6 +10,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -81,6 +82,11 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<RcRoleWrapper> getRoleWrapperList() {
         return null;
+    }
+
+    @Override
+    public PageInfo<Bill> queryByDate(Date startDate,Date endDate) {
+        return new PageInfo<>(mapper.queryByDate(startDate,endDate));
     }
 
 

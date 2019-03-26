@@ -72,16 +72,24 @@ public class BillMgrController extends BaseController{
     @RequestMapping(value = "page")
     public PageBean<Bill> queryForPage(@RequestParam(value = "start", defaultValue = "1") int start,
                                        @RequestParam(value = "length", defaultValue = "10") int pageSize,
-                                       @RequestParam(value = "billFlag", defaultValue = "10") int billFlag,HttpSession session) {
+                                       @RequestParam(value = "billFlag", defaultValue = "10") int billFlag,
+                                       @RequestParam(value = "starDate", required = false)  String starDate,
+                                       @RequestParam(value = "endDate", required = false)  String endDate,HttpSession session) {
         ShiroUser shiroUser = (ShiroUser) session.getAttribute("user");
         Bill bill = new Bill();
         bill.setBillUser(shiroUser.getUsername());
         bill.setBillFlag(billFlag);
-        PageInfo<Bill> pageInfo;
+        PageInfo<Bill> pageInfo= new PageInfo<Bill>();
         if (billFlag == 0 || billFlag ==1){
             pageInfo = billService.listForPage((start / pageSize) + 1, pageSize,bill);
-        }else {
+        }else if(starDate == null && endDate == null){
             pageInfo = billService.queryAll();
+        }else{
+            try {
+                pageInfo = billService.queryByDate(new SimpleDateFormat("yyyy-MM-dd").parse(starDate),new SimpleDateFormat("yyyy-MM-dd").parse(endDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return new PageBean<>(pageInfo);
     }
