@@ -1,7 +1,6 @@
 package com.common.system.service.impl;
 
 import com.common.system.entity.finance.Bill;
-import com.common.system.entity.system.RcRoleWrapper;
 import com.common.system.mapper.BillMapper;
 import com.common.system.service.BillService;
 import com.common.system.util.Result;
@@ -10,7 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -92,6 +91,11 @@ public class BillServiceImpl implements BillService {
             }
         }
         return res;
+    }
+
+    @Override
+    public PageInfo<Bill> queryByDate(Date startDate,Date endDate) {
+        return new PageInfo<>(mapper.queryByDate(startDate,endDate));
     }
 
 

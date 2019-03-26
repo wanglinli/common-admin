@@ -5,6 +5,7 @@ import com.common.system.entity.system.RcRoleWrapper;
 import com.common.system.util.Result;
 import com.github.pagehelper.PageInfo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,5 +30,5 @@ public interface BillService {
     String getDataByMonthAndYearIn(String param);
 
     String getDataByMonthAndYearOut(String param);
-
+    PageInfo<Bill> queryByDate(Date startDate,Date endDate);
 }

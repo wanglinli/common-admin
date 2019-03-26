@@ -164,6 +164,33 @@
             for (var i = 0; i < list.length; i++) {
                 list[i].checked = status;
             }
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+<!-- 引入 ECharts 文件 -->
+<script src="echarts/echarts.common.min.js"></script>
+<!-- 引入 日期插件 -->
+<script src="Datepicker/external/jquery/jquery.js"></script>
+<script src="Datepicker/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.structure.css" />
+<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.theme.css" />
+
+
+<![endif]-->
+<script>
+    function onClickCheckbox(clickName, target) {
+        var status = false;
+        if (document.getElementById(clickName).checked) {
+            status = true;
+        }
+        var list = document.getElementsByName(target);
+        for (var i = 0; i < list.length; i++) {
+            list[i].checked = status;
         }
 
         function iFrameHeight() {

@@ -6,6 +6,9 @@
         width: 100%;
     }
 
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+
     .bordered tr:hover {
         background: #fbf8e9;
         -o-transition: all 0.1s ease-in-out;
@@ -268,4 +271,3 @@
     var year = new Date().getFullYear();
     getInAndOut(year)
 </script>
-

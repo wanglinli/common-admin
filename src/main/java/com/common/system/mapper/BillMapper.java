@@ -4,6 +4,7 @@ import com.common.system.entity.finance.Bill;
 import com.common.system.entity.finance.count.MonthData;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -29,4 +30,6 @@ public interface BillMapper {
 
     @Select("select * from common_bill where billTime like #{param}")
     List<Bill> getDataByMonthAndYear(String param);
+    @Select("select from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")
+    List<Bill> queryByDate(Date startDate,Date endDate);
 }
