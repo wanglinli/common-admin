@@ -30,5 +30,5 @@ public interface BillService {
     String getDataByParamsIn(String param);
 
     String getDataByParamsOut(String param);
-    PageInfo<Bill> queryByDate(Date startDate,Date endDate);
+    PageInfo<Bill> queryByDate(Bill bill);
 }

@@ -7,11 +7,9 @@ import com.common.system.util.Result;
 import com.common.system.util.SafeDouble;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.util.concurrent.AtomicDouble;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -98,8 +96,8 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public PageInfo<Bill> queryByDate(Date startDate,Date endDate) {
-        return new PageInfo<>(mapper.queryByDate(startDate,endDate));
+    public PageInfo<Bill> queryByDate(Bill bill) {
+        return new PageInfo<>(mapper.queryByDate(bill));
     }
 
 
