@@ -3,6 +3,7 @@ package com.common.system.controller;
 import com.common.system.entity.finance.Bill;
 import com.common.system.entity.finance.DealType;
 import com.common.system.entity.finance.count.MonthData;
+import com.common.system.entity.finance.count.WeekData;
 import com.common.system.service.BillService;
 import com.common.system.service.DealTypeService;
 import com.common.system.shiro.ShiroUser;
@@ -37,37 +38,69 @@ public class CountController  extends BaseController{
     @ResponseBody
     public MonthData getYearAndMonthDataIn(@RequestParam(value = "year") String year){
         MonthData monthData = new MonthData();
-        monthData.setOne(billService.getDataByMonthAndYearIn(year+"-01"));
-        monthData.setTwo(billService.getDataByMonthAndYearIn(year+"-02"));
-        monthData.setThree(billService.getDataByMonthAndYearIn(year+"-03"));
-        monthData.setFour(billService.getDataByMonthAndYearIn(year+"-04"));
-        monthData.setFive(billService.getDataByMonthAndYearIn(year+"-05"));
-        monthData.setSix(billService.getDataByMonthAndYearIn(year+"-06"));
-        monthData.setSeven(billService.getDataByMonthAndYearIn(year+"-07"));
-        monthData.setEight(billService.getDataByMonthAndYearIn(year+"-08"));
-        monthData.setNine(billService.getDataByMonthAndYearIn(year+"-09"));
-        monthData.setTen(billService.getDataByMonthAndYearIn(year+"-10"));
-        monthData.setEleven(billService.getDataByMonthAndYearIn(year+"-11"));
-        monthData.setTwelve(billService.getDataByMonthAndYearIn(year+"-12"));
+        monthData.setOne(billService.getDataByParamsIn(year+"-01"));
+        monthData.setTwo(billService.getDataByParamsIn(year+"-02"));
+        monthData.setThree(billService.getDataByParamsIn(year+"-03"));
+        monthData.setFour(billService.getDataByParamsIn(year+"-04"));
+        monthData.setFive(billService.getDataByParamsIn(year+"-05"));
+        monthData.setSix(billService.getDataByParamsIn(year+"-06"));
+        monthData.setSeven(billService.getDataByParamsIn(year+"-07"));
+        monthData.setEight(billService.getDataByParamsIn(year+"-08"));
+        monthData.setNine(billService.getDataByParamsIn(year+"-09"));
+        monthData.setTen(billService.getDataByParamsIn(year+"-10"));
+        monthData.setEleven(billService.getDataByParamsIn(year+"-11"));
+        monthData.setTwelve(billService.getDataByParamsIn(year+"-12"));
         return monthData;
+    }
+
+
+    @RequestMapping(value = "weekIn", method = RequestMethod.POST)
+    @ResponseBody
+    public WeekData getWeekDataIn(@RequestParam(value = "week") String week){
+        WeekData weekData = new WeekData();
+        String[] data = week.split(",");
+        weekData.setOne(billService.getDataByParamsIn(data[0]));
+        weekData.setTwo(billService.getDataByParamsIn(data[1]));
+        weekData.setThree(billService.getDataByParamsIn(data[2]));
+        weekData.setFour(billService.getDataByParamsIn(data[3]));
+        weekData.setFive(billService.getDataByParamsIn(data[4]));
+        weekData.setSix(billService.getDataByParamsIn(data[5]));
+        weekData.setSeven(billService.getDataByParamsIn(data[6]));
+
+        return weekData;
+    }
+
+    @RequestMapping(value = "weekOut", method = RequestMethod.POST)
+    @ResponseBody
+    public WeekData getWeekDataOut(@RequestParam(value = "week") String week){
+        WeekData weekData = new WeekData();
+        String[] data = week.split(",");
+        weekData.setOne(billService.getDataByParamsOut(data[0]));
+        weekData.setTwo(billService.getDataByParamsOut(data[1]));
+        weekData.setThree(billService.getDataByParamsOut(data[2]));
+        weekData.setFour(billService.getDataByParamsOut(data[3]));
+        weekData.setFive(billService.getDataByParamsOut(data[4]));
+        weekData.setSix(billService.getDataByParamsOut(data[5]));
+        weekData.setSeven(billService.getDataByParamsOut(data[6]));
+        return weekData;
     }
 
     @RequestMapping(value = "yearAndMonthOut", method = RequestMethod.POST)
     @ResponseBody
     public MonthData getYearAndMonthDataOut(@RequestParam(value = "year") String year){
         MonthData monthData = new MonthData();
-        monthData.setOne(billService.getDataByMonthAndYearOut(year+"-01"));
-        monthData.setTwo(billService.getDataByMonthAndYearOut(year+"-02"));
-        monthData.setThree(billService.getDataByMonthAndYearOut(year+"-03"));
-        monthData.setFour(billService.getDataByMonthAndYearOut(year+"-04"));
-        monthData.setFive(billService.getDataByMonthAndYearOut(year+"-05"));
-        monthData.setSix(billService.getDataByMonthAndYearOut(year+"-06"));
-        monthData.setSeven(billService.getDataByMonthAndYearOut(year+"-07"));
-        monthData.setEight(billService.getDataByMonthAndYearOut(year+"-08"));
-        monthData.setNine(billService.getDataByMonthAndYearOut(year+"-09"));
-        monthData.setTen(billService.getDataByMonthAndYearOut(year+"-10"));
-        monthData.setEleven(billService.getDataByMonthAndYearOut(year+"-11"));
-        monthData.setTwelve(billService.getDataByMonthAndYearOut(year+"-12"));
+        monthData.setOne(billService.getDataByParamsOut(year+"-01"));
+        monthData.setTwo(billService.getDataByParamsOut(year+"-02"));
+        monthData.setThree(billService.getDataByParamsOut(year+"-03"));
+        monthData.setFour(billService.getDataByParamsOut(year+"-04"));
+        monthData.setFive(billService.getDataByParamsOut(year+"-05"));
+        monthData.setSix(billService.getDataByParamsOut(year+"-06"));
+        monthData.setSeven(billService.getDataByParamsOut(year+"-07"));
+        monthData.setEight(billService.getDataByParamsOut(year+"-08"));
+        monthData.setNine(billService.getDataByParamsOut(year+"-09"));
+        monthData.setTen(billService.getDataByParamsOut(year+"-10"));
+        monthData.setEleven(billService.getDataByParamsOut(year+"-11"));
+        monthData.setTwelve(billService.getDataByParamsOut(year+"-12"));
         return monthData;
     }
 
