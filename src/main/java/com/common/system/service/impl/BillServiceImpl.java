@@ -94,8 +94,8 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public PageInfo<Bill> queryByDate(Date startDate,Date endDate) {
-        return new PageInfo<>(mapper.queryByDate(startDate,endDate));
+    public PageInfo<Bill> queryByDate(Bill bill) {
+        return new PageInfo<>(mapper.queryByDate(bill));
     }
 
 

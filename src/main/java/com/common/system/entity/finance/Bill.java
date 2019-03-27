@@ -27,6 +27,10 @@ public class Bill extends Model<Bill> implements Serializable {
     private String billUser;
     @Excel(name="交易说明")
     private String billNote;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endDate;
     /**
      * 支出还是收入 0出：１入
      */
@@ -102,5 +106,21 @@ public class Bill extends Model<Bill> implements Serializable {
 
     public void setBillFlag(int billFlag) {
         this.billFlag = billFlag;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

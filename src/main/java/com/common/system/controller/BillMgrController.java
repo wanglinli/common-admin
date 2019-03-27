@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Controller
@@ -82,12 +83,16 @@ public class BillMgrController extends BaseController{
         PageInfo<Bill> pageInfo= new PageInfo<Bill>();
         if (billFlag == 0 || billFlag ==1){
             pageInfo = billService.listForPage((start / pageSize) + 1, pageSize,bill);
-        }else if(startDate == null && endDate == null){
+        }else if((startDate == null ||"".equals(startDate)) && (endDate == null || "".equals(endDate))){
             pageInfo = billService.queryAll();
         }else{
             try {
-                pageInfo = billService.queryByDate(new SimpleDateFormat("yyyy-MM-dd").parse(startDate),new SimpleDateFormat("yyyy-MM-dd").parse(endDate));
-                System.out.printf("------------"+pageInfo.getList().size());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(endDate));
+                calendar.add(Calendar.DATE,1);
+                bill.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(startDate));
+                bill.setEndDate(calendar.getTime());
+                pageInfo = billService.queryByDate(bill);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

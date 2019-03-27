@@ -105,7 +105,7 @@
     <link rel="stylesheet" href="adminlte/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="adminlte/dist/css/skins/_all-skins.min.css"
+    <link rel="stylesheet" href="adminlte/dist/css/skins/_all-skins.min.css">
     <!-- 以上为公共css -->
 
     <!-- daterange picker -->
@@ -154,15 +154,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-<!-- 引入 ECharts 文件 -->
-<script src="echarts/echarts.common.min.js"></script>
-<!-- 引入 日期插件 -->
-<script src="Datepicker/external/jquery/jquery.js"></script>
-<script src="Datepicker/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.css" />
-<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.structure.css" />
-<link rel="stylesheet" type="text/css" href="Datepicker/jquery-ui.theme.css" />
 
 
 <![endif]-->

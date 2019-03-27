@@ -30,6 +30,6 @@ public interface BillMapper {
 
     @Select("select * from common_bill where billTime like #{param}")
     List<Bill> getDataByMonthAndYear(String param);
-    @Select("select from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")
-    List<Bill> queryByDate(Date startDate,Date endDate);
+    @Select("select * from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")
+    List<Bill> queryByDate(Bill bill);
 }
