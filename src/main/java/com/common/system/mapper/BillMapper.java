@@ -29,6 +29,8 @@ public interface BillMapper {
     Integer delete(int id);
 
     @Select("select * from common_bill where billTime like #{param}")
+    List<Bill> getDataByParam(String param);
+
     List<Bill> getDataByMonthAndYear(String param);
     @Select("select * from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")
     List<Bill> queryByDate(Bill bill);

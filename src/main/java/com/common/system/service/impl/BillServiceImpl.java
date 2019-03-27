@@ -4,12 +4,12 @@ import com.common.system.entity.finance.Bill;
 import com.common.system.mapper.BillMapper;
 import com.common.system.service.BillService;
 import com.common.system.util.Result;
+import com.common.system.util.SafeDouble;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -70,27 +70,29 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public String getDataByMonthAndYearIn(String param) {
-        List<Bill> list = mapper.getDataByMonthAndYear(param+"%");
-        String res = "0";
+    public String getDataByParamsIn(String param) {
+        List<Bill> list = mapper.getDataByParam(param+"%");
+        double res = 0;
         for (Bill money:list) {
             if (1 == money.getBillFlag()){
-                res += (new Double(res) + new Double(money.getBillMoney()));
+                SafeDouble safeDouble = new SafeDouble();
+                res = res + safeDouble.pi(money.getBillMoney());
             }
         }
-        return res;
+        return String.valueOf(res);
     }
 
     @Override
-    public String getDataByMonthAndYearOut(String param) {
-        List<Bill> list = mapper.getDataByMonthAndYear(param + "%");
-        String res = "0";
+    public String getDataByParamsOut(String param) {
+        List<Bill> list = mapper.getDataByParam(param + "%");
+        double res = 0;
         for (Bill money:list) {
             if (0 == money.getBillFlag()){
-                res += (new Double(res) + new Double(money.getBillMoney()));
+                SafeDouble safeDouble = new SafeDouble();
+                res = res + safeDouble.pi(money.getBillMoney());
             }
         }
-        return res;
+        return String.valueOf(res);
     }
 
     @Override

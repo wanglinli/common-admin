@@ -27,8 +27,8 @@ public interface BillService {
 
     Result<Integer> update(Bill type);
 
-    String getDataByMonthAndYearIn(String param);
+    String getDataByParamsIn(String param);
 
-    String getDataByMonthAndYearOut(String param);
+    String getDataByParamsOut(String param);
     PageInfo<Bill> queryByDate(Bill bill);
 }
