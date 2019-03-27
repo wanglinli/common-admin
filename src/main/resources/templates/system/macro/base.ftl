@@ -154,22 +154,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function onClickCheckbox(clickName, target) {
-            var status = false;
-            if (document.getElementById(clickName).checked) {
-                status = true;
-            }
-            var list = document.getElementsByName(target);
-            for (var i = 0; i < list.length; i++) {
-                list[i].checked = status;
-            }
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
 
 <!-- 引入 ECharts 文件 -->
 <script src="echarts/echarts.common.min.js"></script>
@@ -192,15 +176,16 @@
         for (var i = 0; i < list.length; i++) {
             list[i].checked = status;
         }
+    }
 
-        function iFrameHeight() {
-            var ifm = document.getElementById("content");
-            var subWeb = document.frames ? document.frames["content"].document : ifm.contentDocument;
-            if (ifm != null && subWeb != null) {
-                ifm.height = subWeb.body.scrollHeight;
-            }
+    function iFrameHeight() {
+        var ifm = document.getElementById("content");
+        var subWeb = document.frames ? document.frames["content"].document : ifm.contentDocument;
+        if (ifm != null && subWeb != null) {
+            ifm.height = subWeb.body.scrollHeight;
         }
-    </script>
+    }
+</script>
 </#macro>
 
 <#macro jsFile>
