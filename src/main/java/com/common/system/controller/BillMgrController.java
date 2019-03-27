@@ -101,16 +101,50 @@ public class BillMgrController extends BaseController{
     }
 
 
-    @RequestMapping(value = "exportExcel", method = RequestMethod.GET)
-    public void exportExcel(ModelMap modelMap, HttpServletRequest request,
+    @RequestMapping(value = "exportExcel/{exportDate}", method = RequestMethod.GET)
+    public void exportExcel(@PathVariable String exportDate,ModelMap modelMap, HttpServletRequest request,
                             HttpServletResponse response) {
-        PageInfo<Bill> result = billService.queryAll();
-        ExportParams params = new ExportParams("支出信息", null, ExcelType.XSSF);
-        modelMap.put(NormalExcelConstants.DATA_LIST, result.getList());
+        PageInfo<Bill> result = null;
+        String [] arr = exportDate.split("_");
+        ;
+        String title = "";
+        String excleName = "";
+        if(arr.length<3){
+            result  = billService.queryAll();
+        }else {
+            Bill bill = new Bill();
+            try {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(arr[2]));
+                calendar.add(Calendar.DATE,1);
+                bill.setStartDate(new SimpleDateFormat("yyyy-MM-dd").parse(arr[1]));
+                bill.setEndDate(calendar.getTime());
+                result = billService.queryByDate(bill);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        switch (arr[0]){
+            case "0":
+                title = "支出信息";
+                excleName = "支出信息表:";
+                break;
+            case "1":
+                title = "收入信息";
+                excleName = "收入信息表:";
+                break;
+            default:
+                title = "历史账单";
+                excleName = "历史账单表:";
+                break;
+        }
+        ExportParams params = new ExportParams(title, null, ExcelType.XSSF);
+        modelMap.put(NormalExcelConstants.DATA_LIST, result != null ? result.getList() : null);
         modelMap.put(NormalExcelConstants.CLASS, Bill.class);
         modelMap.put(NormalExcelConstants.PARAMS, params);
         String fileName = DateUtil.format(new Date(), DateUtil.NORM_DATETIME_PATTERN);
-        modelMap.put(NormalExcelConstants.FILE_NAME, "支出信息表:" + fileName);
+            modelMap.put(NormalExcelConstants.FILE_NAME, excleName + fileName);
         PoiBaseView.render(modelMap, request, response, NormalExcelConstants.EASYPOI_EXCEL_VIEW);
     }
 

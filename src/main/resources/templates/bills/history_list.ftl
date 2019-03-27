@@ -15,7 +15,7 @@
                     <div class="col-md-2">
                         <button class="btn btn-sm btn-primary"  onclick="queryByDate()">查询</button>
                         <@shiro.hasPermission name="bills/exportExcel">
-                        <a class="btn btn-sm btn-primary" href="/bills/exportExcel">导出</a>
+                        <button class="btn btn-sm btn-primary" onclick="exportByDate()">导出</button>
                         </@shiro.hasPermission>
                     </div>
                 </div>
@@ -117,12 +117,23 @@
         })  ;
     }
 
-    function securityReload() {
-        reloadTable(bills_history_tab);
-    }
-
 
     function queryByDate() {
-        bills_history_tab = getData();
+        var r = new RegExp("^[1-2]\\d{3}-(0?[1-9]||1[0-2])-(0?[1-9]||[1-2][1-9]||3[0-1])$");
+        if(("" === $('#datepickerStart2').val() && "" === $('#datepickerEnd2').val()) ||(r.test($('#datepickerStart2').val()) && r.test($('#datepickerEnd2').val()))) {
+            bills_history_tab = getData();
+        }else alertMsg("开始日期或结束日期格式错误，请输入yyyy-mm-dd格式的日期,！","error");
     }
+    
+    function exportByDate() {
+
+        var r = new RegExp("^[1-2]\\d{3}-(0?[1-9]||1[0-2])-(0?[1-9]||[1-2][1-9]||3[0-1])$");
+            if(("" === $('#datepickerStart2').val() && "" === $('#datepickerEnd2').val()) ||(r.test($('#datepickerStart2').val()) && r.test($('#datepickerEnd2').val()))){
+
+                alertMsg("正在下载...请稍等!","success");
+                var exportDate = 2 + "_" + $('#datepickerStart2').val() + "_" + $('#datepickerEnd2').val();
+                window.location.href = "/bills/exportExcel/" + exportDate;
+            }else alertMsg("开始日期或结束日期格式错误，请输入yyyy-mm-dd格式的日期,！","error");
+    }
+
 </script>
