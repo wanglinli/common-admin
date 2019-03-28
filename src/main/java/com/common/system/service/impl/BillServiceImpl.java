@@ -75,8 +75,7 @@ public class BillServiceImpl implements BillService {
         double res = 0;
         for (Bill money:list) {
             if (1 == money.getBillFlag()){
-                SafeDouble safeDouble = new SafeDouble();
-                res = res + safeDouble.pi(money.getBillMoney());
+                res = res + new SafeDouble().pi(money.getBillMoney());
             }
         }
         return String.valueOf(res);
@@ -84,7 +83,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public String getDataByParamsOut(String param) {
-        List<Bill> list = mapper.getDataByParam(param + "%");
+        List<Bill> list = mapper.getDataByParam(param+"%");
         double res = 0;
         for (Bill money:list) {
             if (0 == money.getBillFlag()){

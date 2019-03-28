@@ -59,13 +59,13 @@ public class CountController  extends BaseController{
     public WeekData getWeekDataIn(@RequestParam(value = "week") String week){
         WeekData weekData = new WeekData();
         String[] data = week.split(",");
-        weekData.setOne(billService.getDataByParamsIn(data[0]));
-        weekData.setTwo(billService.getDataByParamsIn(data[1]));
-        weekData.setThree(billService.getDataByParamsIn(data[2]));
-        weekData.setFour(billService.getDataByParamsIn(data[3]));
-        weekData.setFive(billService.getDataByParamsIn(data[4]));
-        weekData.setSix(billService.getDataByParamsIn(data[5]));
-        weekData.setSeven(billService.getDataByParamsIn(data[6]));
+        weekData.setOne(billService.getDataByParamsIn(data[0]) +" ");
+        weekData.setTwo(billService.getDataByParamsIn(data[1]) +" ");
+        weekData.setThree(billService.getDataByParamsIn(data[2]) +" ");
+        weekData.setFour(billService.getDataByParamsIn(data[3]) +" ");
+        weekData.setFive(billService.getDataByParamsIn(data[4]) +" ");
+        weekData.setSix(billService.getDataByParamsIn(data[5]) +" ");
+        weekData.setSeven(billService.getDataByParamsIn(data[6]) +" ");
 
         return weekData;
     }
@@ -75,13 +75,13 @@ public class CountController  extends BaseController{
     public WeekData getWeekDataOut(@RequestParam(value = "week") String week){
         WeekData weekData = new WeekData();
         String[] data = week.split(",");
-        weekData.setOne(billService.getDataByParamsOut(data[0]));
-        weekData.setTwo(billService.getDataByParamsOut(data[1]));
-        weekData.setThree(billService.getDataByParamsOut(data[2]));
-        weekData.setFour(billService.getDataByParamsOut(data[3]));
-        weekData.setFive(billService.getDataByParamsOut(data[4]));
-        weekData.setSix(billService.getDataByParamsOut(data[5]));
-        weekData.setSeven(billService.getDataByParamsOut(data[6]));
+        weekData.setOne(billService.getDataByParamsOut(data[0]) +" ");
+        weekData.setTwo(billService.getDataByParamsOut(data[1]) +" ");
+        weekData.setThree(billService.getDataByParamsOut(data[2]) +" ");
+        weekData.setFour(billService.getDataByParamsOut(data[3]) +" ");
+        weekData.setFive(billService.getDataByParamsOut(data[4]) +" ");
+        weekData.setSix(billService.getDataByParamsOut(data[5]) +" ");
+        weekData.setSeven(billService.getDataByParamsOut(data[6]) +" ");
         return weekData;
     }
 

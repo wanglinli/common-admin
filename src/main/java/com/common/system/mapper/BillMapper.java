@@ -31,6 +31,9 @@ public interface BillMapper {
     @Select("select * from common_bill where billTime like #{param}")
     List<Bill> getDataByParam(String param);
 
+//    @Select("select * from common_bill where find_in_set(#{param},billTime)")
+//    List<Bill> getDataByParamWeek(String param);
+
     List<Bill> getDataByMonthAndYear(String param);
     @Select("select * from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")
     List<Bill> queryByDate(Bill bill);

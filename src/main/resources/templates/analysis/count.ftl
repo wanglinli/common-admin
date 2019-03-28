@@ -319,6 +319,7 @@
         day.push(week.split('-')[0]);
         rightMonthWeek.showLoading();
 
+        console.log(day.toString())
         //收入
         var res = [];
         $.ajax({
