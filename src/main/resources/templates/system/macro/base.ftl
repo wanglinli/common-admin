@@ -246,6 +246,9 @@
     <!-- DataTables -->
     <script src="adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="other/count/utils.js"></script>
+    <script src="other/count/month.js"></script>
+    <script src="other/count/week.js"></script>
     <script type="text/javascript">
         //当你需要多条件查询，你可以调用此方法，动态修改参数传给服务器
         window.reloadTable = function (oTable) {

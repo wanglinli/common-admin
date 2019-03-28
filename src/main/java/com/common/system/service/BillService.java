@@ -30,5 +30,10 @@ public interface BillService {
     String getDataByParamsIn(String param);
 
     String getDataByParamsOut(String param);
+
+    List getDataByType(String month,String[] types);
+
+    List getDataByTypeWeek(String[] week,String[] types);
+
     PageInfo<Bill> queryByDate(Bill bill);
 }

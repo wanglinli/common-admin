@@ -75,13 +75,13 @@ public class CountController  extends BaseController{
     public WeekData getWeekDataOut(@RequestParam(value = "week") String week){
         WeekData weekData = new WeekData();
         String[] data = week.split(",");
-        weekData.setOne(billService.getDataByParamsOut(data[0]) +" ");
-        weekData.setTwo(billService.getDataByParamsOut(data[1]) +" ");
-        weekData.setThree(billService.getDataByParamsOut(data[2]) +" ");
-        weekData.setFour(billService.getDataByParamsOut(data[3]) +" ");
-        weekData.setFive(billService.getDataByParamsOut(data[4]) +" ");
-        weekData.setSix(billService.getDataByParamsOut(data[5]) +" ");
-        weekData.setSeven(billService.getDataByParamsOut(data[6]) +" ");
+        weekData.setOne(billService.getDataByParamsOut(data[0]));
+        weekData.setTwo(billService.getDataByParamsOut(data[1]));
+        weekData.setThree(billService.getDataByParamsOut(data[2]));
+        weekData.setFour(billService.getDataByParamsOut(data[3]));
+        weekData.setFive(billService.getDataByParamsOut(data[4]));
+        weekData.setSix(billService.getDataByParamsOut(data[5]));
+        weekData.setSeven(billService.getDataByParamsOut(data[6]));
         return weekData;
     }
 
@@ -111,12 +111,31 @@ public class CountController  extends BaseController{
         List<DealType> types_in =  typeService.queryAllByUser(user.getUsername(),0);
         List<DealType> types_out =  typeService.queryAllByUser(user.getUsername(),1);
         List<DealType> types = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         types.addAll(types_in);
         types.addAll(types_out);
-        return types;
+        for (DealType obj:types) {
+            result.add(obj.getType());
+        }
+        return result;
     }
 
+    @RequestMapping(value = "type/money", method = RequestMethod.POST)
+    @ResponseBody
+    public List getTypeMoney(@RequestParam(value = "type") String type,@RequestParam(value = "month") String month){
+        String temp = type.replace("[","").replace("]","").replaceAll("\"","");
+        String[] types = temp.split(",");
+        return billService.getDataByType(month,types);
+    }
 
+    @RequestMapping(value = "type/moneyWeek", method = RequestMethod.POST)
+    @ResponseBody
+    public List getTypeMoneyWeek(@RequestParam(value = "type") String type,@RequestParam(value = "week") String week){
+        String[] weeks = week.split(",");
+        String temp = type.replace("[","").replace("]","").replaceAll("\"","");
+        String[] types = temp.split(",");
+        return billService.getDataByTypeWeek(weeks,types);
+    }
 
 
     @RequestMapping(value = "count",method = RequestMethod.GET)

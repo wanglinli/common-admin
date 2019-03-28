@@ -1,6 +1,7 @@
 package com.common.system.service.impl;
 
 import com.common.system.entity.finance.Bill;
+import com.common.system.entity.finance.count.WeekData;
 import com.common.system.mapper.BillMapper;
 import com.common.system.service.BillService;
 import com.common.system.util.Result;
@@ -10,6 +11,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -92,6 +94,48 @@ public class BillServiceImpl implements BillService {
             }
         }
         return String.valueOf(res);
+    }
+
+    @Override
+    public List getDataByType(String month,String[] types) {
+        List<Bill> list = mapper.getDataByParam(month + "%");
+        return getList(types, list);
+    }
+
+    @Override
+    public List getDataByTypeWeek(String[] week, String[] types) {
+        WeekData weekData = new WeekData();
+        weekData.setOne(week[0] + "%");
+        weekData.setTwo(week[1] + "%");
+        weekData.setThree(week[2] + "%");
+        weekData.setFour(week[3] + "%");
+        weekData.setFive(week[4] + "%");
+        weekData.setSix(week[5] + "%");
+        weekData.setSeven(week[6] + "%");
+        List<Bill> bills = mapper.getDataByTypeWeek(weekData);
+//        bills.addAll(mapper.getDataByParam(week[1] + "%"));
+//        bills.addAll(mapper.getDataByParam(week[2] + "%"));
+//        bills.addAll(mapper.getDataByParam(week[3] + "%"));
+//        bills.addAll(mapper.getDataByParam(week[4] + "%"));
+//        bills.addAll(mapper.getDataByParam(week[5] + "%"));
+//        bills.addAll(mapper.getDataByParam(week[6] + "%"));
+        return getList(types, bills);
+    }
+
+    private List getList(String[] types, List<Bill> bills) {
+        List<Double> result = new ArrayList<>();
+        double res = 0;
+        for (String type:types) {
+            for (Bill money:bills) {
+                if (type.equals(money.getBillNote())){
+                    SafeDouble safeDouble = new SafeDouble();
+                    res = res + safeDouble.pi(money.getBillMoney());
+                }
+            }
+            result.add(res);
+            res = 0;
+        }
+        return result;
     }
 
     @Override

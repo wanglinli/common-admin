@@ -1,10 +1,9 @@
 package com.common.system.mapper;
 
 import com.common.system.entity.finance.Bill;
-import com.common.system.entity.finance.count.MonthData;
+import com.common.system.entity.finance.count.WeekData;
 import org.apache.ibatis.annotations.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -31,8 +30,8 @@ public interface BillMapper {
     @Select("select * from common_bill where billTime like #{param}")
     List<Bill> getDataByParam(String param);
 
-//    @Select("select * from common_bill where find_in_set(#{param},billTime)")
-//    List<Bill> getDataByParamWeek(String param);
+    @Select("select * from common_bill where billTime like #{one} or billTime like #{two} or billTime like #{three} or billTime like #{four} or billTime like #{five} or billTime like #{six} or billTime like #{seven}")
+    List<Bill> getDataByTypeWeek(WeekData weekData);
 
     List<Bill> getDataByMonthAndYear(String param);
     @Select("select * from common_bill where billTime>=#{startDate} and billTime<=#{endDate}")

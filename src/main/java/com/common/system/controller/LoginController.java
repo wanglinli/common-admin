@@ -1,17 +1,22 @@
 package com.common.system.controller;
 
+import com.common.system.entity.system.RcUser;
+import com.common.system.service.UserService;
 import com.common.system.shiro.ShiroKit;
 import com.common.system.shiro.ShiroUser;
-import org.apache.shiro.SecurityUtils;
+import com.common.system.util.Result;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 /**
  * Created by Mr.Yangxiufeng on 2017/6/15.
@@ -20,6 +25,14 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class LoginController extends BaseController{
+
+    private final UserService userService;
+
+    @Autowired
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
+
     /**
      * 进入登录页面
      */
@@ -28,6 +41,20 @@ public class LoginController extends BaseController{
         modelAndView.setViewName("/system/login");
         return modelAndView;
     }
+
+    @RequestMapping(value = "/save")
+    public
+    @ResponseBody
+    Result save(RcUser rcUser) {
+        rcUser.setCreateTime(new Date());
+        rcUser.setStatus(1);
+        String salt = ShiroKit.getRandomSalt(5);
+        rcUser.setSalt(salt);
+        String saltPwd = ShiroKit.md5(rcUser.getPassword(), salt);
+        rcUser.setPassword(saltPwd);
+        return userService.save(rcUser);
+    }
+
     @RequestMapping(value = {"/postLogin"}, method = RequestMethod.POST)
     public String postLogin(@RequestParam(required = true) String username, @RequestParam(required = true) String password, ModelAndView modelAndView, HttpSession session){
         Subject subject = ShiroKit.getSubject();

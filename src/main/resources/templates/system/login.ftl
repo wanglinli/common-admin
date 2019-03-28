@@ -73,7 +73,6 @@
                 </div>
                 <p>${failed!}</p>
                 <button type="submit" class="login__submit">登 录</button>
-                <p class="login__signup">还没有账号? &nbsp;<a href="#" target="_blank">立刻注册</a></p>
             </form>
         </div>
         <div class="app">
